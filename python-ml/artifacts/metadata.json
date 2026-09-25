@@ -1,0 +1,49 @@
+{
+  "version": "v1.0.0",
+  "training_date": "2026-09-13T00:42:09.977871",
+  "algorithm_clusterer": "K-Means (k=4)",
+  "algorithm_classifier": "Random Forest Classifier (n=120)",
+  "dataset_version": "normative-synthetic-v1.0",
+  "samples_count": 2000,
+  "features": [
+    "logical",
+    "numerical",
+    "verbal",
+    "openness",
+    "conscientiousness",
+    "extraversion",
+    "agreeableness",
+    "neuroticism",
+    "consistency",
+    "avg_response_time_ms"
+  ],
+  "metrics": {
+    "kmeans_silhouette_score": 0.1696,
+    "kmeans_inertia": 10489.3,
+    "rf_accuracy": 0.9175,
+    "top_features": [
+      [
+        "extraversion",
+        0.21233356296097444
+      ],
+      [
+        "agreeableness",
+        0.18320114416702066
+      ],
+      [
+        "openness",
+        0.1518395980219758
+      ],
+      [
+        "numerical",
+        0.12555117503039961
+      ],
+      [
+        "conscientiousness",
+        0.09951075763156386
+      ]
+    ]
+  },
+  "status": "active",
+  "disclaimer": "DEVELOPMENT / DEMONSTRATION MODEL: Trained on synthetic normative psychometric data for demonstration purposes."
+}

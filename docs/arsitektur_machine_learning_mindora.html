@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Panduan Komprehensif Arsitektur & Alur Machine Learning - Mindora</title>
+<style>
+    @page {
+        size: A4 portrait;
+        margin: 14mm 14mm 16mm 14mm;
+        @bottom-right {
+            content: "Halaman " counter(page);
+            font-size: 8pt;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #64748b;
+        }
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Arial, sans-serif;
+        color: #1e293b;
+        background-color: #ffffff;
+        font-size: 9.5pt;
+        line-height: 1.55;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    /* Page container */
+    .page {
+        page-break-after: always;
+        position: relative;
+        padding-bottom: 10px;
+    }
+    .page:last-child {
+        page-break-after: avoid;
+    }
+
+    /* Header & Footer styling for pages */
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1.5px solid #e2e8f0;
+        padding-bottom: 6px;
+        margin-bottom: 16px;
+    }
+    .page-header .brand {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 700;
+        color: #0f172a;
+        font-size: 9pt;
+        letter-spacing: -0.2px;
+    }
+    .page-header .brand-badge {
+        background: linear-gradient(135deg, #4f46e5, #06b6d4);
+        color: white;
+        padding: 2px 7px;
+        border-radius: 4px;
+        font-size: 7.5pt;
+        font-weight: 800;
+    }
+    .page-header .doc-title {
+        color: #64748b;
+        font-size: 8pt;
+    }
+
+    /* Typography */
+    h1 {
+        font-size: 20pt;
+        font-weight: 800;
+        color: #0f172a;
+        letter-spacing: -0.5px;
+        line-height: 1.25;
+        margin-bottom: 8px;
+    }
+
+    h2 {
+        font-size: 13.5pt;
+        font-weight: 700;
+        color: #1e293b;
+        border-left: 4px solid #4f46e5;
+        padding-left: 10px;
+        margin-top: 14px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    h3 {
+        font-size: 10.5pt;
+        font-weight: 700;
+        color: #334155;
+        margin-top: 10px;
+        margin-bottom: 6px;
+    }
+
+    p {
+        margin-bottom: 8px;
+        text-align: justify;
+    }
+
+    /* Cover Page */
+    .cover-page {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 255mm;
+        padding: 20px 10px;
+    }
+    .cover-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+    .cover-badge {
+        display: inline-block;
+        background: #eef2ff;
+        color: #4338ca;
+        font-weight: 700;
+        font-size: 8.5pt;
+        padding: 5px 12px;
+        border-radius: 20px;
+        border: 1px solid #c7d2fe;
+    }
+    .cover-center {
+        margin: 50px 0;
+    }
+    .cover-title-main {
+        font-size: 26pt;
+        font-weight: 900;
+        color: #0f172a;
+        line-height: 1.15;
+        margin-bottom: 14px;
+        background: linear-gradient(135deg, #1e1b4b 0%, #312e81 40%, #4338ca 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .cover-subtitle {
+        font-size: 12pt;
+        color: #475569;
+        line-height: 1.5;
+        margin-bottom: 24px;
+    }
+    .cover-meta-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 16px;
+        margin-top: 20px;
+    }
+    .meta-item {
+        display: flex;
+        flex-direction: column;
+    }
+    .meta-label {
+        font-size: 7.5pt;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #64748b;
+        font-weight: 600;
+    }
+    .meta-value {
+        font-size: 9pt;
+        font-weight: 700;
+        color: #1e293b;
+        margin-top: 2px;
+    }
+
+    /* Cards & Boxes */
+    .info-card {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 10px 14px;
+        margin-bottom: 12px;
+    }
+    .info-card.primary {
+        background: #f5f3ff;
+        border-color: #ddd6fe;
+    }
+    .info-card.success {
+        background: #ecfdf5;
+        border-color: #a7f3d0;
+    }
+    .info-card.warning {
+        background: #fffbeb;
+        border-color: #fde68a;
+    }
+
+    .card-title {
+        font-weight: 700;
+        font-size: 9.5pt;
+        color: #1e293b;
+        margin-bottom: 4px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .card-body {
+        font-size: 8.8pt;
+        color: #334155;
+    }
+
+    /* Grid Layouts */
+    .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+    .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-bottom: 12px;
+    }
+    .grid-4 {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+        margin-bottom: 12px;
+    }
+
+    /* Feature Badge */
+    .badge {
+        display: inline-block;
+        padding: 2px 7px;
+        border-radius: 4px;
+        font-size: 7.5pt;
+        font-weight: 600;
+        margin-right: 4px;
+    }
+    .badge-indigo { background: #e0e7ff; color: #3730a3; }
+    .badge-emerald { background: #d1fae5; color: #065f46; }
+    .badge-amber { background: #fef3c7; color: #92400e; }
+    .badge-rose { background: #ffe4e6; color: #9f1239; }
+    .badge-blue { background: #dbeafe; color: #1e40af; }
+    .badge-purple { background: #f3e8ff; color: #6b21a8; }
+
+    /* Tables */
+    table.custom-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 10px 0 14px 0;
+        font-size: 8.5pt;
+    }
+    table.custom-table th {
+        background: #f1f5f9;
+        color: #334155;
+        font-weight: 700;
+        text-align: left;
+        padding: 6px 10px;
+        border: 1px solid #cbd5e1;
+    }
+    table.custom-table td {
+        padding: 6px 10px;
+        border: 1px solid #e2e8f0;
+        vertical-align: top;
+    }
+    table.custom-table tr:nth-child(even) {
+        background-color: #f8fafc;
+    }
+
+    /* Diagrams Container */
+    .diagram-box {
+        background: #ffffff;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 12px;
+        margin: 12px 0;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+    .diagram-caption {
+        font-size: 8pt;
+        font-weight: 600;
+        color: #64748b;
+        text-align: center;
+        margin-top: 6px;
+    }
+
+    /* Lists */
+    ul, ol {
+        margin-left: 18px;
+        margin-bottom: 10px;
+    }
+    li {
+        margin-bottom: 3px;
+        font-size: 9pt;
+        color: #334155;
+    }
+
+    /* Highlight box */
+    .formula-box {
+        background: #1e293b;
+        color: #e2e8f0;
+        border-radius: 6px;
+        padding: 8px 12px;
+        font-family: 'Consolas', 'Courier New', monospace;
+        font-size: 8.5pt;
+        margin: 8px 0;
+    }
+
+    /* Steps pill */
+    .step-badge {
+        background: #4f46e5;
+        color: white;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 8pt;
+        font-weight: bold;
+        margin-right: 6px;
+    }
+</style>
+</head>
+<body>
+
+<!-- ==================== HALAMAN 1: COVER ==================== -->
+<div class="page cover-page">
+    <div class="cover-top">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <svg width="34" height="34" viewBox="0 0 40 40" fill="none">
+                <rect width="40" height="40" rx="8" fill="#4F46E5"/>
+                <path d="M12 28V12L20 20L28 12V28" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="20" cy="25" r="2.5" fill="#38BDF8"/>
+            </svg>
+            <div>
+                <div style="font-weight: 800; font-size: 13pt; color: #0f172a; letter-spacing: -0.3px;">MINDORA</div>
+                <div style="font-size: 7.5pt; color: #64748b; text-transform: uppercase; font-weight: 600;">Psychometrics & AI Analytics</div>
+            </div>
+        </div>
+        <span class="cover-badge">Dokumentasi Teknis & Metode AI</span>
+    </div>
+
+    <div class="cover-center">
+        <div style="color: #4f46e5; font-size: 9pt; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px;">Whitepaper Arsitektur Sistem</div>
+        <h1 class="cover-title-main">Metode & Alur Pengolahan Machine Learning Psikotes Online</h1>
+        <p class="cover-subtitle">
+            Panduan komprehensif mulai dari otentikasi pengguna, pelaksanaan dua modul asesmen psikometri, struktur penyimpanan basis data, rekayasa fitur data, hingga penalaran inferensi model Machine Learning (Ensemble Triad: K-Means, Random Forest, & SHAP Explainability).
+        </p>
+
+        <div class="cover-meta-grid">
+            <div class="meta-item">
+                <span class="meta-label">Nama Aplikasi</span>
+                <span class="meta-value">Mindora - Psikotes Online Terintegrasi</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Arsitektur Machine Learning</span>
+                <span class="meta-value">Ensemble (K-Means + Random Forest + TreeSHAP)</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Lapisan Keamanan Data</span>
+                <span class="meta-value">AES-256-GCM + 2FA DOB + Zero PII Pipeline</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Model Psikometri</span>
+                <span class="meta-value">Cognitive Battery (3 Domain) + Big Five (OCEAN)</span>
+            </div>
+        </div>
+    </div>
+
+    <div style="border-top: 1.5px solid #e2e8f0; padding-top: 14px; display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-size: 8pt; color: #64748b;">Mindora Technology Architecture Reference &bull; Confidential & Internal</span>
+        <span style="font-size: 8pt; font-weight: 700; color: #334155;">Tahun 2026 &bull; Versi 1.0</span>
+    </div>
+</div>
+
+<!-- ==================== HALAMAN 2: ALUR PENGGUNA & 2 TES ==================== -->
+<div class="page">
+    <div class="page-header">
+        <div class="brand"><span class="brand-badge">BAB 1</span> ALUR PENGGUNA & PENGERJAAN ASESMEN</div>
+        <div class="doc-title">Mindora Architecture Guide</div>
+    </div>
+
+    <h2>1. Alur Masuk Akun hingga Selesai Pengerjaan Tes</h2>
+    <p>
+        Platform Mindora menerapkan alur yang terstandarisasi untuk menjamin keamanan identitas pengguna (Zero PII leak) sekaligus menghasilkan data pengukuran psikometrik yang valid dan andal.
+    </p>
+
+    <!-- DIAGRAM 1: ALUR END-TO-END -->
+    <div class="diagram-box">
+        <svg viewBox="0 0 740 180" width="100%" height="180" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#4F46E5"/>
+                    <stop offset="100%" stop-color="#06B6D4"/>
+                </linearGradient>
+                <filter id="shadow" x="-5%" y="-10%" width="110%" height="130%">
+                    <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.08"/>
+                </filter>
+            </defs>
+
+            <!-- Step 1 -->
+            <g transform="translate(10, 20)" filter="url(#shadow)">
+                <rect width="130" height="130" rx="8" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5"/>
+                <rect width="130" height="6" rx="3" fill="#4F46E5"/>
+                <circle cx="28" cy="26" r="12" fill="#EEF2FF"/>
+                <text x="28" y="30" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="bold" fill="#4F46E5" text-anchor="middle">1</text>
+                <text x="48" y="30" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="bold" fill="#0F172A">Login / 2FA</text>
+                <text x="14" y="54" font-family="'Segoe UI', sans-serif" font-size="8" fill="#475569">• Email & Password</text>
+                <text x="14" y="70" font-family="'Segoe UI', sans-serif" font-size="8" fill="#475569">• 2FA Tanggal Lahir</text>
+                <text x="14" y="86" font-family="'Segoe UI', sans-serif" font-size="8" fill="#475569">• Enkripsi AES-256</text>
+                <text x="14" y="102" font-family="'Segoe UI', sans-serif" font-size="8" fill="#475569">• HMAC verification</text>
+                <rect x="12" y="112" width="106" height="14" rx="3" fill="#E0E7FF"/>
+                <text x="65" y="122" font-family="'Segoe UI', sans-serif" font-size="7" font-weight="bold" fill="#3730A3" text-anchor="middle">Akses Terotorisasi</text>
+            </g>
+
+            <!-- Arrow 1 -->
+            <path d="M 145 85 L 165 85" stroke="#94A3B8" stroke-width="2" stroke-dasharray="4 2" marker-end="url(#arrow)"/>
+
+            <!-- Step 2 -->
+            <g transform="translate(170, 20)" filter="url(#shadow)">
+                <rect width="155" height="130" rx="8" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5"/>
+                <rect width="155" height="6" rx="3" fill="#0EA5E9"/>
+                <circle cx="28" cy="26" r="12" fill="#E0F2FE"/>
+                <text x="28" y="30" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="bold" fill="#0EA5E9" text-anchor="middle">2</text>
+                <text x="48" y="30" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="bold" fill="#0F172A">Tes 1: Kognitif</text>
+                <text x="14" y="54" font-family="'Segoe UI', sans-serif" font-size="8" fill="#475569">• Pilihan Ganda (MCQ)</text>
+                <text x="14" y="70" font-family="'Segoe UI', sans-serif" font-size="8" fill="#475569">• Logika, Numerik, Verbal</text>
+                <text x="14" y="86" font-family="'Segoe UI', sans-serif" font-size="8" fill="#475569">• Hitung Skor Benar/Salah</text>
+                <text x="14" y="102" font-family="'Segoe UI', sans-serif" font-size="8" fill="#475569">• Telemetri respon (ms)</text>
+                <rect x="12" y="112" width="131" height="14" rx="3" fill="#E0F2FE"/>
+                <text x="77" y="122" font-family="'Segoe UI', sans-serif" font-size="7" font-weight="bold" fill="#0369A1" text-anchor="middle">Ukur Kapasitas Nalar</text>
+            </g>
+
+            <!-- Arrow 2 -->
+            <path d="M 330 85 L 350 85" stroke="#94A3B8" stroke-width="2" stroke-dasharray="4 2"/>
+
+            <!-- Step 3 -->
+            <g transform="translate(355, 20)" filter="url(#shadow)">
+                <rect width="155" height="130" rx="8" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5"/>
+                <rect width="155" height="6" rx="3" fill="#10B981"/>
+                <circle cx="28" cy="26" r="12" fill="#D1FAE5"/>
+                <text x="28" y="30" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="bold" fill="#10B981" text-anchor="middle">3</text>
+                <text x="48" y="30" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="bold" fill="#0F172A">Tes 2: Kepribadian</text>
+                <text x="14" y="54" font-family="'Segoe UI', sans-serif" font-size="8" fill="#475569">• Big Five (OCEAN)</text>
+                <text x="14" y="70" font-family="'Segoe UI', sans-serif" font-size="8" fill="#475569">• Skala Likert (1 - 5)</text>
+                <text x="14" y="86" font-family="'Segoe UI', sans-serif" font-size="8" fill="#475569">• Reverse scoring auto</text>
+                <text x="14" y="102" font-family="'Segoe UI', sans-serif" font-size="8" fill="#475569">• Skor Konsistensi Jawaban</text>
+                <rect x="12" y="112" width="131" height="14" rx="3" fill="#D1FAE5"/>
+                <text x="77" y="122" font-family="'Segoe UI', sans-serif" font-size="7" font-weight="bold" fill="#047857" text-anchor="middle">Ukur Karakter Kerja</text>
+            </g>
+
+            <!-- Arrow 3 -->
+            <path d="M 515 85 L 535 85" stroke="#94A3B8" stroke-width="2" stroke-dasharray="4 2"/>
+
+            <!-- Step 4 -->
+            <g transform="translate(540, 20)" filter="url(#shadow)">
+                <rect width="185" height="130" rx="8" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5"/>
+                <rect width="185" height="6" rx="3" fill="#8B5CF6"/>
+                <circle cx="28" cy="26" r="12" fill="#EDE9FE"/>
+                <text x="28" y="30" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="bold" fill="#8B5CF6" text-anchor="middle">4</text>
+                <text x="48" y="30" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="bold" fill="#0F172A">Pipeline Engine AI</text>
+                <text x="14" y="54" font-family="'Segoe UI', sans-serif" font-size="8" fill="#475569">• Simpan sesi di Database</text>
+                <text x="14" y="70" font-family="'Segoe UI', sans-serif" font-size="8" fill="#475569">• Normalisasi 10 Vektor Fitur</text>
+                <text x="14" y="86" font-family="'Segoe UI', sans-serif" font-size="8" fill="#475569">• Eksekusi ML (KMeans+RF)</text>
+                <text x="14" y="102" font-family="'Segoe UI', sans-serif" font-size="8" fill="#475569">• SHAP: Kekuatan & Lemah</text>
+                <rect x="12" y="112" width="161" height="14" rx="3" fill="#EDE9FE"/>
+                <text x="92" y="122" font-family="'Segoe UI', sans-serif" font-size="7" font-weight="bold" fill="#6D28D9" text-anchor="middle">Hasil Dashboard Interaktif</text>
+            </g>
+        </svg>
+        <div class="diagram-caption">Gambar 1.1: Alur Siklus Pengguna dari Masuk Akun hingga Pemrosesan Pipeline AI</div>
+    </div>
+
+    <h3>Penjelasan Dua Modul Asesmen Psikotes</h3>
+    <div class="grid-2">
+        <div class="info-card primary">
+            <div class="card-title">
+                <span class="badge badge-indigo">Modul 1</span> Tes Kemampuan Kognitif
+            </div>
+            <div class="card-body">
+                Tes ini mengukur kapasitas penalaran analitis dan fleksibilitas berpikir tanpa bias latar belakang budaya/spesifik:
+                <ul style="margin-top: 4px; margin-left: 14px;">
+                    <li><strong>Penalaran Logis (Logical Reasoning):</strong> Pola deduksi, silogisme, diagram hubungan sebab-akibat.</li>
+                    <li><strong>Penalaran Numerik (Numerical Reasoning):</strong> Logika deret angka, estimasi matematika terapan, interpretasi data.</li>
+                    <li><strong>Penalaran Verbal (Verbal Reasoning):</strong> Hubungan analogi kata, silogisme makna verbal, dan pemahaman konsep kritis.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="info-card success">
+            <div class="card-title">
+                <span class="badge badge-emerald">Modul 2</span> Asesmen Kepribadian (Big Five / OCEAN)
+            </div>
+            <div class="card-body">
+                Model kepribadian baku internasional yang memetakan pola perilaku, preferensi kerja, dan interaksi sosial:
+                <ul style="margin-top: 4px; margin-left: 14px;">
+                    <li><strong>Openness (O):</strong> Rasa ingin tahu, orisinalitas ide, dan inovasi.</li>
+                    <li><strong>Conscientiousness (C):</strong> Ketelitian, keuletan, dan disiplin target.</li>
+                    <li><strong>Extraversion (E):</strong> Antusiasme komunikasi dan relasi sosial.</li>
+                    <li><strong>Agreeableness (A):</strong> Empati, kompromi, dan kooperatif tim.</li>
+                    <li><strong>Neuroticism (N):</strong> Reaktivitas stres (stabilitas emosi).</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-card warning">
+        <div class="card-title">
+            <span class="badge badge-amber">Telemetri</span> Pencatatan Latensi Respon (Response Time Tracking)
+        </div>
+        <div class="card-body">
+            Sistem mencatat variabel <code>response_time_ms</code> (dalam satuan milidetik) pada setiap jawaban. Ini mendeteksi apakah pengguna menjawab terlalu tergesa-gesa (indikasi asal klik) atau terlalu lama merenung. Nilai rata-rata waktu respon ini nantinya dimasukkan sebagai salah satu dimensi fitur penting ke dalam model Machine Learning.
+        </div>
+    </div>
+</div>
+
+<!-- ==================== HALAMAN 3: BASIS DATA & ZERO PII ==================== -->
+<div class="page">
+    <div class="page-header">
+        <div class="brand"><span class="brand-badge">BAB 2</span> STRUKTUR DATABASE & PRIVASI DATA</div>
+        <div class="doc-title">Mindora Architecture Guide</div>
+    </div>
+
+    <h2>2. Aliran Data ke Basis Data & Struktur Tabel</h2>
+    <p>
+        Ketika pengguna menyelesaikan asesmen, data mentah ditampung ke dalam basis data MySQL relasional melalui arsitektur multi-tabel untuk memisahkan data identitas pribadi (PII), data jawaban mentah, data skor terhitung, dan data prediksi Machine Learning.
+    </p>
+
+    <!-- DIAGRAM 2: DATABASE RELATION & PIPELINE ZERO-PII -->
+    <div class="diagram-box">
+        <svg viewBox="0 0 740 180" width="100%" height="180" xmlns="http://www.w3.org/2000/svg">
+            <!-- PII Cluster -->
+            <rect x="10" y="15" width="220" height="150" rx="6" fill="#FEF2F2" stroke="#FCA5A5" stroke-dasharray="3 3"/>
+            <text x="20" y="32" font-family="'Segoe UI', sans-serif" font-size="8.5" font-weight="bold" fill="#991B1B">ZONA PRIVASI TINGGI (PII)</text>
+            
+            <rect x="20" y="42" width="200" height="50" rx="4" fill="#FFFFFF" stroke="#EF4444"/>
+            <text x="30" y="58" font-family="'Segoe UI', sans-serif" font-size="8" font-weight="bold" fill="#991B1B">users & user_profiles</text>
+            <text x="30" y="70" font-family="'Segoe UI', sans-serif" font-size="7.5" fill="#475569">Nama, Email, DOB, Kontak</text>
+            <text x="30" y="82" font-family="'Segoe UI', sans-serif" font-size="7.5" font-weight="bold" fill="#DC2626">Terenkripsi AES-256-GCM</text>
+
+            <rect x="20" y="100" width="200" height="55" rx="4" fill="#FFFFFF" stroke="#CBD5E1"/>
+            <text x="30" y="115" font-family="'Segoe UI', sans-serif" font-size="8" font-weight="bold" fill="#0F172A">assessment_sessions & answers</text>
+            <text x="30" y="127" font-family="'Segoe UI', sans-serif" font-size="7.5" fill="#475569">session_id, question_id, is_correct</text>
+            <text x="30" y="139" font-family="'Segoe UI', sans-serif" font-size="7.5" fill="#475569">response_time_ms (waktu klik)</text>
+
+            <!-- Arrow Bridge Zero PII -->
+            <path d="M 230 120 L 290 120" stroke="#4F46E5" stroke-width="2.5" marker-end="url(#arrow)"/>
+            <rect x="235" y="95" width="50" height="16" rx="3" fill="#EEF2FF" stroke="#C7D2FE"/>
+            <text x="260" y="106" font-family="'Segoe UI', sans-serif" font-size="7" font-weight="bold" fill="#4338CA" text-anchor="middle">Anonimasi</text>
+
+            <!-- Scoring Cluster -->
+            <rect x="295" y="15" width="200" height="150" rx="6" fill="#F0FDF4" stroke="#86EFAC"/>
+            <text x="305" y="32" font-family="'Segoe UI', sans-serif" font-size="8.5" font-weight="bold" fill="#166534">ZONA SKORING PSIKOMETRI</text>
+
+            <rect x="305" y="42" width="180" height="50" rx="4" fill="#FFFFFF" stroke="#22C55E"/>
+            <text x="315" y="58" font-family="'Segoe UI', sans-serif" font-size="8" font-weight="bold" fill="#166534">assessment_scores</text>
+            <text x="315" y="70" font-family="'Segoe UI', sans-serif" font-size="7.5" fill="#475569">overall_score, archetype_label</text>
+            <text x="315" y="82" font-family="'Segoe UI', sans-serif" font-size="7.5" fill="#475569">strengths[], development_areas[]</text>
+
+            <rect x="305" y="100" width="180" height="55" rx="4" fill="#FFFFFF" stroke="#CBD5E1"/>
+            <text x="315" y="115" font-family="'Segoe UI', sans-serif" font-size="8" font-weight="bold" fill="#0F172A">cognitive_ & personality_scores</text>
+            <text x="315" y="127" font-family="'Segoe UI', sans-serif" font-size="7.5" fill="#475569">logical, numerical, verbal (0-100%)</text>
+            <text x="315" y="139" font-family="'Segoe UI', sans-serif" font-size="7.5" fill="#475569">O, C, E, A, N (0-100%) + consistency</text>
+
+            <!-- Arrow to ML -->
+            <path d="M 495 120 L 525 120" stroke="#8B5CF6" stroke-width="2.5"/>
+
+            <!-- ML Cluster -->
+            <rect x="530" y="15" width="200" height="150" rx="6" fill="#F5F3FF" stroke="#DDD6FE"/>
+            <text x="540" y="32" font-family="'Segoe UI', sans-serif" font-size="8.5" font-weight="bold" fill="#5B21B6">ZONA MACHINE LEARNING (ZERO PII)</text>
+
+            <rect x="540" y="42" width="180" height="40" rx="4" fill="#FFFFFF" stroke="#A855F7"/>
+            <text x="550" y="56" font-family="'Segoe UI', sans-serif" font-size="8" font-weight="bold" fill="#6B21A8">ml_features</text>
+            <text x="550" y="68" font-family="'Segoe UI', sans-serif" font-size="7.5" fill="#475569">anonymous_user_id (HMAC Hash)</text>
+            <text x="550" y="78" font-family="'Segoe UI', sans-serif" font-size="7" fill="#6B21A8">feature_vector [10 Dimensi Angka]</text>
+
+            <rect x="540" y="90" width="180" height="65" rx="4" fill="#FFFFFF" stroke="#A855F7"/>
+            <text x="550" y="104" font-family="'Segoe UI', sans-serif" font-size="8" font-weight="bold" fill="#6B21A8">ml_predictions & ml_models</text>
+            <text x="550" y="116" font-family="'Segoe UI', sans-serif" font-size="7.5" fill="#475569">cluster_id (0-3) & cluster_label</text>
+            <text x="550" y="128" font-family="'Segoe UI', sans-serif" font-size="7.5" fill="#475569">predicted_category & confidence</text>
+            <text x="550" y="142" font-family="'Segoe UI', sans-serif" font-size="7" font-weight="bold" fill="#047857">shap_values (Explainable AI Factors)</text>
+        </svg>
+        <div class="diagram-caption">Gambar 2.1: Arsitektur Isolasi Data dan Pipa Tanpa PII (Zero Personally Identifiable Information)</div>
+    </div>
+
+    <h3>Rincian Isi Tabel Database</h3>
+    <table class="custom-table">
+        <thead>
+            <tr>
+                <th style="width: 22%;">Nama Tabel</th>
+                <th style="width: 38%;">Kolom Kunci & Tipe Data</th>
+                <th style="width: 40%;">Deskripsi Fungsi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>assessment_sessions</strong></td>
+                <td><code>user_id</code>, <code>assessment_id</code>, <code>status</code> (in_progress, completed), <code>started_at</code>, <code>completed_at</code>, <code>total_time_seconds</code></td>
+                <td>Mencatat metadata sesi pengerjaan asesmen, menghitung total durasi pengguna menyelesaikan tes.</td>
+            </tr>
+            <tr>
+                <td><strong>answers</strong></td>
+                <td><code>session_id</code>, <code>question_id</code>, <code>selected_option_id</code>, <code>is_correct</code>, <code>answer_value</code>, <code>response_time_ms</code></td>
+                <td>Menyimpan setiap butir respon secara terperinci beserta milidetik latensi respon pengerjaan.</td>
+            </tr>
+            <tr>
+                <td><strong>assessment_scores</strong></td>
+                <td><code>session_id</code>, <code>user_id</code>, <code>assessment_type</code>, <code>overall_score</code>, <code>archetype_label</code>, <code>strengths (JSON)</code>, <code>development_areas (JSON)</code></td>
+                <td>Master record skor akhir, merangkum teks kesimpulan, daftar kekuatan utama, dan area pengembangan.</td>
+            </tr>
+            <tr>
+                <td><strong>cognitive_scores</strong></td>
+                <td><code>logical_score</code>, <code>numerical_score</code>, <code>verbal_score</code>, <code>overall_cognitive_score</code>, <code>percentile</code></td>
+                <td>Menampung nilai persentase akurasi (0-100%) dan persentil populasi normatif untuk modul kognitif.</td>
+            </tr>
+            <tr>
+                <td><strong>personality_scores</strong></td>
+                <td><code>openness</code>, <code>conscientiousness</code>, <code>extraversion</code>, <code>agreeableness</code>, <code>neuroticism</code>, <code>consistency_score</code></td>
+                <td>Menyimpan skor 5 faktor kepribadian (0-100%) dan skor integritas/konsistensi jawaban pengguna.</td>
+            </tr>
+            <tr>
+                <td><strong>ml_features</strong></td>
+                <td><code>anonymous_user_id</code>, <code>assessment_score_id</code>, <code>feature_vector (JSON)</code></td>
+                <td>Vektor 10 dimensi numerik yang sepenuhnya dianonimkan (tidak ada nama, email, atau tanggal lahir).</td>
+            </tr>
+            <tr>
+                <td><strong>ml_predictions</strong></td>
+                <td><code>cluster_id</code>, <code>cluster_label</code>, <code>predicted_category</code>, <code>confidence</code>, <code>shap_values (JSON)</code></td>
+                <td>Hasil inferensi model Machine Learning yang memuat klaster, akurasi prediksi, dan bobot dampak SHAP.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- ==================== HALAMAN 4: FEATURE ENGINEERING ==================== -->
+<div class="page">
+    <div class="page-header">
+        <div class="brand"><span class="brand-badge">BAB 3</span> REKAYASA FITUR (FEATURE ENGINEERING)</div>
+        <div class="doc-title">Mindora Architecture Guide</div>
+    </div>
+
+    <h2>3. Dari Jawaban Mentah Menjadi Vektor 10 Dimensi</h2>
+    <p>
+        Model Machine Learning tidak dapat memproses jawaban mentah berupa teks secara langsung. Oleh karena itu, <em>PsychometricService</em> di sisi backend Laravel melakukan transformasi matematis untuk mengekstrak vektor fitur standar yang seragam (10-Dimensional Normalized Feature Vector).
+    </p>
+
+    <div class="grid-2">
+        <div class="info-card">
+            <div class="card-title"><span class="step-badge">1</span> Normalisasi Tes Kognitif</div>
+            <div class="card-body">
+                Setiap dimensi (Logika, Numerik, Verbal) dihitung menggunakan rasio jawaban benar terhadap jumlah butir soal yang diujikan pada dimensi tersebut:
+                <div class="formula-box">
+                    Score_Dimensi = (Jawaban_Benar / Total_Soal_Dimensi) * 100
+                </div>
+                Skor keseluruhan adalah rata-rata aritmatika dari ketiga domain tersebut.
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="card-title"><span class="step-badge">2</span> Normalisasi Likert Big Five & Reversal</div>
+            <div class="card-body">
+                Soal kepribadian menggunakan skala Likert 1–5. Butir soal dengan kalimat terbalik (*reverse scored*) dibalik nilainya secara otomatis sebelum dijumlahkan:
+                <div class="formula-box">
+                    Jika Reverse: Nilai_Baru = 6 - Nilai_Mentah<br>
+                    Persentase = ((Total_Nilai - Min_Skor) / (Max_Skor - Min_Skor)) * 100
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-card warning">
+        <div class="card-title"><span class="step-badge">3</span> Indeks Deteksi Konsistensi Respons (Consistency Score)</div>
+        <div class="card-body">
+            Untuk menguji apakah pengguna membaca soal dengan sungguh-sungguh atau memilih opsi secara acak, sistem mengukur diskrepansi antara pertanyaan positif dan pertanyaan negatif yang mengukur konstruk yang sama:
+            <div class="formula-box">
+                Discrepancy = |Rata_Rata(Soal_Normal) - Rata_Rata(Soal_Reverse)|<br>
+                Consistency_Score = MAX(50.0, MIN(100.0, 100.0 - (Discrepancy * 12.5)))
+            </div>
+            Jika pengguna tidak konsisten (menjawab setuju pada "Saya sangat rapi" dan juga setuju pada "Saya sangat ceroboh"), maka skor konsistensi akan turun secara proporsional.
+        </div>
+    </div>
+
+    <h3>Struktur Vektor Fitur 10 Dimensi (Feature Vector)</h3>
+    <p>
+        Hasil kalkulasi dari seluruh tahapan di atas disusun ke dalam 10 array angka yang dikirim ke Python microservice:
+    </p>
+
+    <table class="custom-table">
+        <thead>
+            <tr>
+                <th style="width: 5%;">No</th>
+                <th style="width: 25%;">Kunci Fitur</th>
+                <th style="width: 30%;">Nama Tampilan Bahasa Indonesia</th>
+                <th style="width: 20%;">Rentang Nilai</th>
+                <th style="width: 20%;">Sumber Pengukuran</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td><code>logical</code></td>
+                <td>Penalaran Logis & Deduktif</td>
+                <td>0.0 &ndash; 100.0</td>
+                <td>Tes Kognitif (Subtes Logika)</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td><code>numerical</code></td>
+                <td>Penalaran Numerik & Analisis Data</td>
+                <td>0.0 &ndash; 100.0</td>
+                <td>Tes Kognitif (Subtes Numerik)</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td><code>verbal</code></td>
+                <td>Penalaran Verbal & Konseptual</td>
+                <td>0.0 &ndash; 100.0</td>
+                <td>Tes Kognitif (Subtes Verbal)</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td><code>openness</code></td>
+                <td>Openness (Kreativitas & Ide Baru)</td>
+                <td>0.0 &ndash; 100.0</td>
+                <td>Big Five Personality (O)</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td><code>conscientiousness</code></td>
+                <td>Conscientiousness (Ketelitian & Disiplin)</td>
+                <td>0.0 &ndash; 100.0</td>
+                <td>Big Five Personality (C)</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td><code>extraversion</code></td>
+                <td>Extraversion (Kolaborasi & Sosial)</td>
+                <td>0.0 &ndash; 100.0</td>
+                <td>Big Five Personality (E)</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td><code>agreeableness</code></td>
+                <td>Agreeableness (Empati & Keramahan)</td>
+                <td>0.0 &ndash; 100.0</td>
+                <td>Big Five Personality (A)</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td><code>neuroticism</code></td>
+                <td>Sensitivitas Emosi / Regulasi Stres</td>
+                <td>0.0 &ndash; 100.0</td>
+                <td>Big Five Personality (N)</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td><code>consistency</code></td>
+                <td>Konsistensi Integritas Respon</td>
+                <td>0.0 &ndash; 100.0</td>
+                <td>Validitas Silang Respon</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td><code>avg_response_time_ms</code></td>
+                <td>Kecepatan Menjawab Rata-Rata (ms)</td>
+                <td>500.0 &ndash; 15000.0</td>
+                <td>Telemetri Timestamp Klik</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- ==================== HALAMAN 5: ARSITEKTUR MACHINE LEARNING ==================== -->
+<div class="page">
+    <div class="page-header">
+        <div class="brand"><span class="brand-badge">BAB 4</span> MODEL MACHINE LEARNING (ENSEMBLE TRIAD)</div>
+        <div class="doc-title">Mindora Architecture Guide</div>
+    </div>
+
+    <h2>4. Arsitektur Model Machine Learning</h2>
+    <p>
+        Sistem menggunakan pendekatan <strong>Machine Learning Ensemble</strong> yang berjalan pada microservice berbasis Python (FastAPI). Pendekatan ini menggabungkan pembelajaran tanpa pengawasan (*Unsupervised Learning*), pembelajaran terawasi (*Supervised Learning*), dan penjelasan berbasis teori permainan (*Explainable AI*).
+    </p>
+
+    <!-- DIAGRAM 3: ML ARCHITECTURE -->
+    <div class="diagram-box">
+        <svg viewBox="0 0 740 210" width="100%" height="210" xmlns="http://www.w3.org/2000/svg">
+            <!-- Input -->
+            <g transform="translate(15, 45)">
+                <rect width="130" height="120" rx="6" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1.5"/>
+                <text x="65" y="24" font-family="'Segoe UI', sans-serif" font-size="8.5" font-weight="bold" fill="#0F172A" text-anchor="middle">Input Fitur</text>
+                <rect x="15" y="36" width="100" height="20" rx="3" fill="#E2E8F0"/>
+                <text x="65" y="50" font-family="'Segoe UI', sans-serif" font-size="7.5" fill="#334155" text-anchor="middle">10 Nilai Fitur</text>
+                <text x="65" y="75" font-family="'Segoe UI', sans-serif" font-size="7.5" fill="#64748b" text-anchor="middle">Kognitif + OCEAN</text>
+                <text x="65" y="90" font-family="'Segoe UI', sans-serif" font-size="7.5" fill="#64748b" text-anchor="middle">+ Waktu Respon</text>
+                <rect x="15" y="100" width="100" height="14" rx="3" fill="#FEF08A"/>
+                <text x="65" y="110" font-family="'Segoe UI', sans-serif" font-size="6.5" font-weight="bold" fill="#854D0E" text-anchor="middle">Zero PII (Anonymous)</text>
+            </g>
+
+            <!-- Scaler -->
+            <path d="M 145 105 L 175 105" stroke="#4F46E5" stroke-width="2" marker-end="url(#arrow)"/>
+            <g transform="translate(180, 75)">
+                <rect width="100" height="60" rx="6" fill="#EEF2FF" stroke="#6366F1"/>
+                <text x="50" y="24" font-family="'Segoe UI', sans-serif" font-size="8.5" font-weight="bold" fill="#3730A3" text-anchor="middle">StandardScaler</text>
+                <text x="50" y="42" font-family="'Segoe UI', sans-serif" font-size="7" fill="#4F46E5" text-anchor="middle">Z-score Transform</text>
+                <text x="50" y="52" font-family="'Segoe UI', sans-serif" font-size="6.5" fill="#64748b" text-anchor="middle">(mean=0, var=1)</text>
+            </g>
+
+            <!-- Splits -->
+            <path d="M 280 95 L 320 60" stroke="#6366F1" stroke-width="2"/>
+            <path d="M 280 115 L 320 150" stroke="#6366F1" stroke-width="2"/>
+
+            <!-- Component 1: KMeans -->
+            <g transform="translate(325, 20)">
+                <rect width="200" height="80" rx="6" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.5"/>
+                <text x="15" y="22" font-family="'Segoe UI', sans-serif" font-size="9" font-weight="bold" fill="#166534">1. K-Means Clustering (k=4)</text>
+                <text x="15" y="38" font-family="'Segoe UI', sans-serif" font-size="7.5" fill="#475569">• Tipe: Unsupervised Learning</text>
+                <text x="15" y="52" font-family="'Segoe UI', sans-serif" font-size="7.5" fill="#475569">• Menghitung Jarak Euclidean Centroid</text>
+                <text x="15" y="66" font-family="'Segoe UI', sans-serif" font-size="7.5" font-weight="bold" fill="#15803D">Output: 4 Profil Arketipe Karakter</text>
+            </g>
+
+            <!-- Component 2: Random Forest -->
+            <g transform="translate(325, 115)">
+                <rect width="200" height="80" rx="6" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.5"/>
+                <text x="15" y="22" font-family="'Segoe UI', sans-serif" font-size="9" font-weight="bold" fill="#1E40AF">2. Random Forest (120 Trees)</text>
+                <text x="15" y="38" font-family="'Segoe UI', sans-serif" font-size="7.5" fill="#475569">• Tipe: Supervised Ensemble</text>
+                <text x="15" y="52" font-family="'Segoe UI', sans-serif" font-size="7.5" fill="#475569">• Akurasi Uji: 91.75%</text>
+                <text x="15" y="66" font-family="'Segoe UI', sans-serif" font-size="7.5" font-weight="bold" fill="#1D4ED8">Output: Kategori Profil & % Confidence</text>
+            </g>
+
+            <!-- Path to SHAP -->
+            <path d="M 525 155 L 560 155" stroke="#3B82F6" stroke-width="2"/>
+
+            <!-- Component 3: TreeSHAP -->
+            <g transform="translate(565, 45)">
+                <rect width="160" height="135" rx="6" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.5"/>
+                <text x="80" y="24" font-family="'Segoe UI', sans-serif" font-size="9" font-weight="bold" fill="#6B21A8" text-anchor="middle">3. TreeSHAP (XAI)</text>
+                <text x="12" y="44" font-family="'Segoe UI', sans-serif" font-size="7.5" fill="#475569">• Explainable AI Framework</text>
+                <text x="12" y="60" font-family="'Segoe UI', sans-serif" font-size="7.5" fill="#475569">• Hitung Nilai Marjinal Shapley</text>
+                <text x="12" y="76" font-family="'Segoe UI', sans-serif" font-size="7.5" fill="#475569">• Mengurai Keputusan Model</text>
+                <rect x="10" y="90" width="140" height="35" rx="4" fill="#EDE9FE"/>
+                <text x="80" y="105" font-family="'Segoe UI', sans-serif" font-size="7.5" font-weight="bold" fill="#5B21B6" text-anchor="middle">Menemukan Faktor:</text>
+                <text x="80" y="118" font-family="'Segoe UI', sans-serif" font-size="7" fill="#6D28D9" text-anchor="middle">Kekuatan (+) & Kelemahan (-)</text>
+            </g>
+        </svg>
+        <div class="diagram-caption">Gambar 4.1: Pipeline Model Machine Learning Ensemble Triad (FastAPI Microservice)</div>
+    </div>
+
+    <h3>Rincian 4 Arketipe Hasil Klaster K-Means (k=4)</h3>
+    <div class="grid-2">
+        <div class="info-card primary">
+            <div class="card-title"><span class="badge badge-blue">Cluster 0</span> Analytical & Structured</div>
+            <div class="card-body">
+                <strong>Karakteristik:</strong> Penalaran logika dan numerik di atas rata-rata, conscientiousness tinggi, metodis, dan mengutamakan akurasi data dalam setiap pengambilan keputusan.
+            </div>
+        </div>
+        <div class="info-card" style="background: #faf5ff; border-color: #e9d5ff;">
+            <div class="card-title"><span class="badge badge-purple">Cluster 1</span> Creative & Explorative</div>
+            <div class="card-body">
+                <strong>Karakteristik:</strong> Skor Openness sangat dominan, rasa ingin tahu intelektual tinggi, cepat beradaptasi dengan konsep baru, dan menyukai inovasi berbasis fleksibilitas.
+            </div>
+        </div>
+        <div class="info-card success">
+            <div class="card-title"><span class="badge badge-emerald">Cluster 2</span> Social & Collaborative</div>
+            <div class="card-body">
+                <strong>Karakteristik:</strong> Skor Extraversion dan Agreeableness tinggi, memiliki empati sosial yang kuat, piawai membangun kohesi tim, dan sangat komunikatif.
+            </div>
+        </div>
+        <div class="info-card warning">
+            <div class="card-title"><span class="badge badge-amber">Cluster 3</span> Independent & Task-Oriented</div>
+            <div class="card-body">
+                <strong>Karakteristik:</strong> Kemandirian eksekusi solid, tekun bekerja dengan distraksi minimal, fokus tinggi pada penyelesaian tenggat waktu secara individual.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== HALAMAN 6: KEKUATAN, KELEMAHAN & REKOMENDASI ==================== -->
+<div class="page">
+    <div class="page-header">
+        <div class="brand"><span class="brand-badge">BAB 5</span> PENENTUAN KEKUATAN & KELEMAHAN</div>
+        <div class="doc-title">Mindora Architecture Guide</div>
+    </div>
+
+    <h2>5. Bagaimana Sistem Menyimpulkan Kekuatan & Kelemahan Seseorang?</h2>
+    <p>
+        Banyak sistem tes online memberikan kesimpulan secara sembarangan tanpa dasar ilmiah. Di Mindora, penentuan <strong>Kekuatan (*Strengths*)</strong> dan <strong>Area Pengembangan (*Development Areas / Weaknesses*)</strong> diputuskan secara transparan melalui pendekatan <strong>Hibrida Tiga Lapis (Triple-Layer Inference Engine)</strong>:
+    </p>
+
+    <!-- DIAGRAM 4: DECISION MATRIX -->
+    <div class="diagram-box">
+        <svg viewBox="0 0 740 185" width="100%" height="185" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(15, 20)">
+                <rect width="215" height="145" rx="6" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5"/>
+                <rect width="215" height="6" rx="3" fill="#3B82F6"/>
+                <text x="15" y="24" font-family="'Segoe UI', sans-serif" font-size="9" font-weight="bold" fill="#1E40AF">Lapis 1: Standar Psikometri</text>
+                <text x="15" y="44" font-family="'Segoe UI', sans-serif" font-size="7.5" fill="#475569">• Skor Kognitif &ge; 70% &rarr; Kekuatan</text>
+                <text x="15" y="60" font-family="'Segoe UI', sans-serif" font-size="7.5" fill="#475569">• Skor Kognitif &lt; 70% &rarr; Perlu Latihan</text>
+                <text x="15" y="76" font-family="'Segoe UI', sans-serif" font-size="7.5" fill="#475569">• Conscientiousness &ge; 65% &rarr; Tangguh</text>
+                <text x="15" y="92" font-family="'Segoe UI', sans-serif" font-size="7.5" fill="#475569">• Neuroticism &le; 40% &rarr; Stabil</text>
+                <rect x="12" y="112" width="191" height="20" rx="4" fill="#DBEAFE"/>
+                <text x="107" y="125" font-family="'Segoe UI', sans-serif" font-size="7" font-weight="bold" fill="#1E40AF" text-anchor="middle">Penyaringan Ambang Batas Baku</text>
+            </g>
+
+            <text x="245" y="95" font-family="'Segoe UI', sans-serif" font-size="16" font-weight="bold" fill="#94A3B8" text-anchor="middle">+</text>
+
+            <g transform="translate(260, 20)">
+                <rect width="215" height="145" rx="6" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5"/>
+                <rect width="215" height="6" rx="3" fill="#8B5CF6"/>
+                <text x="15" y="24" font-family="'Segoe UI', sans-serif" font-size="9" font-weight="bold" fill="#6B21A8">Lapis 2: Bobot Dampak SHAP</text>
+                <text x="15" y="44" font-family="'Segoe UI', sans-serif" font-size="7.5" fill="#475569">• Nilai SHAP Positif (+):</text>
+                <text x="25" y="58" font-family="'Segoe UI', sans-serif" font-size="7" fill="#15803D">Faktor pendorong keunggulan utama</text>
+                <text x="15" y="74" font-family="'Segoe UI', sans-serif" font-size="7.5" fill="#475569">• Nilai SHAP Negatif (-):</text>
+                <text x="25" y="88" font-family="'Segoe UI', sans-serif" font-size="7" fill="#B91C1C">Faktor penahan / friksi performa</text>
+                <rect x="12" y="112" width="191" height="20" rx="4" fill="#EDE9FE"/>
+                <text x="107" y="125" font-family="'Segoe UI', sans-serif" font-size="7" font-weight="bold" fill="#5B21B6" text-anchor="middle">Peringkat 5 Pengaruh Dominan</text>
+            </g>
+
+            <text x="490" y="95" font-family="'Segoe UI', sans-serif" font-size="16" font-weight="bold" fill="#94A3B8" text-anchor="middle">=</text>
+
+            <g transform="translate(505, 20)">
+                <rect width="220" height="145" rx="6" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.5"/>
+                <rect width="220" height="6" rx="3" fill="#10B981"/>
+                <text x="15" y="24" font-family="'Segoe UI', sans-serif" font-size="9" font-weight="bold" fill="#166534">Lapis 3: Sintesis Rekomendasi</text>
+                <text x="15" y="44" font-family="'Segoe UI', sans-serif" font-size="7.5" fill="#475569">• Kartu Kekuatan Terbukti di UI</text>
+                <text x="15" y="60" font-family="'Segoe UI', sans-serif" font-size="7.5" fill="#475569">• Saran Area Pengembangan Diri</text>
+                <text x="15" y="76" font-family="'Segoe UI', sans-serif" font-size="7.5" fill="#475569">• Pemetaan Jalur Karir Relevan</text>
+                <text x="15" y="92" font-family="'Segoe UI', sans-serif" font-size="7.5" fill="#475569">• Dialog Eksploratif via AI Mindora</text>
+                <rect x="12" y="112" width="196" height="20" rx="4" fill="#D1FAE5"/>
+                <text x="110" y="125" font-family="'Segoe UI', sans-serif" font-size="7" font-weight="bold" fill="#065F46" text-anchor="middle">Dashboard Hasil Eksekutif</text>
+            </g>
+        </svg>
+        <div class="diagram-caption">Gambar 5.1: Matriks Pengambilan Keputusan Kekuatan dan Area Pengembangan</div>
+    </div>
+
+    <h3>Contoh Logika Penerjemahan Hasil Tes ke Kekuatan Nyata</h3>
+    <table class="custom-table">
+        <thead>
+            <tr>
+                <th style="width: 25%;">Kombinasi Skor Indikator</th>
+                <th style="width: 37%;">Kekuatan yang Diberikan (Strengths)</th>
+                <th style="width: 38%;">Area Rekomendasi Karir & Kolaborasi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Logika &ge; 70% + Numerik &ge; 70%</strong></td>
+                <td>Kemampuan penalaran deduktif kuat, tajam dalam analisis kuantitatif, dan metodis memecahkan masalah struktural.</td>
+                <td>Data Science, Software Architecture, Analisis Kuantitatif, Pemodelan Finansial.</td>
+            </tr>
+            <tr>
+                <td><strong>Openness &ge; 65% + Extraversion &ge; 65%</strong></td>
+                <td>Kaya akan imajinasi konseptual, antusias mengeksplorasi gagasan inovatif, dan komunikatif dalam mempresentasikan visi.</td>
+                <td>Product Design (UI/UX), Inovasi Bisnis Baru, Riset & Pengembangan (R&D), Strategic Marketing.</td>
+            </tr>
+            <tr>
+                <td><strong>Conscientiousness &ge; 70% + Neuroticism &le; 35%</strong></td>
+                <td>Daya tahan kerja stabil, disiplin organisasi tinggi, tenang di bawah tekanan, dan andal dalam menjaga tenggat waktu.</td>
+                <td>Manajemen Operasional, Project Management, Tata Kelola Kepatuhan & Audit, System Engineering.</td>
+            </tr>
+            <tr>
+                <td><strong>Agreeableness &ge; 70% + Extraversion &ge; 65%</strong></td>
+                <td>Empati interpersonal hangat, piawai menyelesaikan konflik tim secara diplomatis, dan fasilitator keharmonisan kelompok.</td>
+                <td>People & Culture / HRD, Kemitraan Strategis, Customer Success, Hubungan Komunitas.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="info-card primary">
+        <div class="card-title">
+            <span class="badge badge-purple">Interaksi Lanjutan</span> Konsultasi Virtual Karir dengan AI Mindora
+        </div>
+        <div class="card-body">
+            Setelah hasil ditampilkan di dashboard pengguna, user dapat langsung mengklik tombol <strong>"Konsultasi dengan AI Mindora"</strong>. Fitur ini menggunakan integrasi model bahasa generasi terkini (Google Gemini / DeepSeek) yang secara aman membaca konteks skor, arketipe, serta nilai SHAP pengguna untuk memberikan saran pengembangan karir personal yang suportif dan manusiawi.
+        </div>
+    </div>
+</div>
+
+<!-- ==================== HALAMAN 7: RINGKASAN & PENUTUP ==================== -->
+<div class="page">
+    <div class="page-header">
+        <div class="brand"><span class="brand-badge">BAB 6</span> KESIMPULAN & SPESIFIKASI TEKNOLOGI</div>
+        <div class="doc-title">Mindora Architecture Guide</div>
+    </div>
+
+    <h2>6. Ringkasan Arsitektur & Spesifikasi Teknologi</h2>
+    <p>
+        Sistem Psikotes Online Mindora mendemonstrasikan perpaduan harmonis antara prinsip psikometri klasik (norma baku, tes kognitif multi-dimensi, Big Five OCEAN) dengan teknologi kecerdasan buatan modern (Ensemble Machine Learning, Explainable AI, dan Enkripsi Zero PII).
+    </p>
+
+    <div class="grid-3" style="margin-top: 14px;">
+        <div class="info-card">
+            <div class="card-title" style="color: #4f46e5;">Backend & Web</div>
+            <div class="card-body">
+                • Laravel 11.x (PHP 8.2+)<br>
+                • MySQL Relational DB<br>
+                • Blade & Vanilla Modern CSS<br>
+                • Enkripsi AES-256-GCM<br>
+                • 2FA DOB Verification
+            </div>
+        </div>
+        <div class="info-card">
+            <div class="card-title" style="color: #059669;">Machine Learning Microservice</div>
+            <div class="card-body">
+                • Python 3.13 / FastAPI<br>
+                • Scikit-Learn (K-Means & RF)<br>
+                • TreeSHAP Explainability<br>
+                • 10-Dimensional Vector<br>
+                • Token-Based Internal API
+            </div>
+        </div>
+        <div class="info-card">
+            <div class="card-title" style="color: #d97706;">GenAI / Virtual Assistant</div>
+            <div class="card-body">
+                • Google Gemini 2.5 Flash API<br>
+                • DeepSeek Provider Support<br>
+                • Kontekstualisasi Profil Otomatis<br>
+                • Disclaimer Non-Klinis Terpasang
+            </div>
+        </div>
+    </div>
+
+    <h3>Prinsip Integritas dan Etika Pengukuran</h3>
+    <div class="info-card warning">
+        <div class="card-body" style="font-size: 8.5pt;">
+            <strong>Catatan Penting:</strong> Hasil asesmen psikotes online ini dirancang khusus untuk eksplorasi potensi diri, gaya kerja tipikal, dan pemetaan karir profesional mandiri. Seluruh hasil disajikan secara objektif dan non-deterministik, serta ditegaskan <strong>bukan merupakan alat diagnosis klinis psikologis atau psikiatrik</strong>.
+        </div>
+    </div>
+
+    <div style="margin-top: 50px; border-top: 1px solid #cbd5e1; padding-top: 16px; display: flex; justify-content: space-between; align-items: flex-end;">
+        <div>
+            <div style="font-weight: bold; font-size: 9pt; color: #0f172a;">Tim Rekayasa Perangkat Lunak & Psikometri</div>
+            <div style="font-size: 8pt; color: #64748b;">Mindora Online Assessment System &bull; Dokumen Resmi</div>
+        </div>
+        <div style="text-align: right;">
+            <div style="font-size: 8pt; color: #64748b;">Status Verifikasi Sistem:</div>
+            <div style="font-size: 9pt; font-weight: bold; color: #16a34a;">&check; Model Aktif & Tervalidasi (v1.0.0)</div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
