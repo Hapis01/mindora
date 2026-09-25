@@ -263,18 +263,18 @@ Setelah menjalankan `php artisan db:seed`, 3 akun demo sudah tersedia:
 
 ## Konfigurasi Tambahan (Opsional)
 
-### Integrasi AI Assistant (DeepSeek)
+### Integrasi AI Assistant (Gemini)
 
-Untuk mengaktifkan fitur AI Assistant, kamu perlu API key dari DeepSeek:
+Untuk mengaktifkan fitur AI Assistant, kamu perlu API key dari Gemini:
 
-1. Daftar di [platform.deepseek.com](https://platform.deepseek.com/)
+1. Daftar di [platform.Gemini.com](https://platform.Gemini.com/)
 2. Buat API key
 3. Buka file `.env`, isi:
 
 ```env
-DEEPSEEK_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxx
-DEEPSEEK_API_BASE=https://api.deepseek.com
-DEEPSEEK_MODEL=deepseek-chat
+GEMINI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxx
+GEMINI_API_BASE=https://api.gemini.com
+GEMINI_MODEL=gemini-chat
 ```
 
 > Tanpa konfigurasi ini, fitur AI Assistant tidak akan berfungsi. Fitur lainnya tetap berjalan normal.
@@ -332,7 +332,7 @@ mindora/
 | **Database** | MySQL 8.0 (via XAMPP) |
 | **Frontend** | Tailwind CSS 3, Alpine.js, Chart.js |
 | **Build Tool** | Vite 5 |
-| **AI Integration** | DeepSeek API (Gemini sebagai alternatif) |
+| **AI Integration** | Gemini API |
 | **Security** | AES-256-GCM encryption, Argon2id hashing, RBAC, CSRF protection, rate limiting, security headers |
 | **Testing** | PHPUnit 10 |
 
