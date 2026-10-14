@@ -71,7 +71,7 @@
 
             <form action="{{ route('assessments.start', $assessment) }}" method="POST" class="w-full sm:w-auto">
                 @csrf
-                <button type="submit" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white font-bold text-sm shadow-xl shadow-brand-600/30 transition-all hover:scale-105 flex items-center justify-center gap-2">
+                <button type="submit" class="w-full sm:w-auto px-8 py-3.5 bg-[#f2f0ff] hover:bg-white text-[#0c0a2a] font-bold text-xs rounded-full transition-all hover:shadow-[0_10px_40px_-12px_rgba(169,155,255,0.65)] flex items-center justify-center gap-2">
                     @if($existingSession)
                         <span>Lanjutkan Sesi Berjalan &rarr;</span>
                     @else

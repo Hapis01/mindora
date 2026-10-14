@@ -21,11 +21,11 @@
                                 {{ $personalityScore->neuroticism }}
                             ],
                             backgroundColor: 'rgba(97, 114, 243, 0.25)',
-                            borderColor: '#6172f3',
-                            pointBackgroundColor: '#818cf8',
+                            borderColor: '#a99bff',
+                            pointBackgroundColor: '#cfc8ff',
                             pointBorderColor: '#ffffff',
                             pointHoverBackgroundColor: '#ffffff',
-                            pointHoverBorderColor: '#6172f3',
+                            pointHoverBorderColor: '#a99bff',
                             borderWidth: 2,
                         }]
                     },
@@ -78,9 +78,9 @@
                                 'rgba(16, 185, 129, 0.8)'
                             ],
                             borderColor: [
-                                '#3b82f6',
-                                '#a855f7',
-                                '#10b981'
+                                '#a99bff',
+                                '#a99bff',
+                                '#a99bff'
                             ],
                             borderWidth: 1,
                             borderRadius: 10,
@@ -112,7 +112,7 @@
 }" x-init="initCharts()">
 
     <!-- Header & Summary Card -->
-    <div class="p-8 sm:p-10 rounded-3xl bg-gradient-to-r from-slate-900 via-brand-950/60 to-slate-900 border border-slate-800 shadow-2xl space-y-6">
+    <div class="p-8 sm:p-10 rounded-3xl border border-[rgba(190,184,255,0.14)] bg-[#100e36] space-y-6">
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <div class="space-y-2">
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-950 border border-brand-800 text-brand-300 text-xs font-semibold">
@@ -128,7 +128,7 @@
             <!-- Overall Score Badge -->
             <div class="p-6 rounded-2xl bg-slate-950/80 border border-slate-800 text-center min-w-[170px] space-y-1">
                 <span class="text-xs font-semibold text-slate-400 block uppercase tracking-wider">Skor Asesmen</span>
-                <div class="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-indigo-300 font-mono">
+                <div class="text-4xl font-black text-purple-300 font-mono">
                     {{ $score->overall_score }}%
                 </div>
                 @if($cognitiveScore)
@@ -309,7 +309,7 @@
                     <div class="space-y-2">
                         <h4 class="text-xl font-extrabold text-purple-300">{{ $mlPrediction->predicted_category ?? 'Systematic Executor' }}</h4>
                         <div class="w-full bg-slate-900 rounded-full h-2 overflow-hidden border border-slate-800">
-                            <div class="bg-gradient-to-r from-purple-500 to-indigo-400 h-2 rounded-full" style="width: {{ $mlPrediction->confidence ?? 85 }}%"></div>
+                            <div class="bg-[#a99bff] h-2 rounded-full" style="width: {{ $mlPrediction->confidence ?? 85 }}%"></div>
                         </div>
                         <p class="text-xs text-slate-400">
                             Tingkat keyakinan probabilitas klasifikasi pohon keputusan (ensemble dari 120 decision trees).
@@ -428,7 +428,7 @@
         </a>
 
         <div class="flex items-center gap-3 w-full sm:w-auto">
-            <a href="{{ route('ai.conversation', $score->id) }}" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-semibold text-center transition-all shadow-lg shadow-purple-600/25 flex items-center justify-center gap-2">
+            <a href="{{ route('ai.conversation', $score->id) }}" class="w-full sm:w-auto px-6 py-3 rounded-full bg-[#f2f0ff] hover:bg-white text-[#0c0a2a] text-xs font-bold text-center transition-all hover:shadow-[0_10px_40px_-12px_rgba(169,155,255,0.65)] flex items-center justify-center gap-2">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
                 Konsultasi AI Mindora
             </a>

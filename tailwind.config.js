@@ -9,6 +9,15 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Satu aksen lilac untuk seluruh situs: purple dan cyan dipetakan ke skala yang sama
+        purple: {
+          50: '#f4f2ff', 100: '#e9e6ff', 200: '#d6d0ff', 300: '#c3baff', 400: '#a99bff',
+          500: '#8e7df0', 600: '#7565d6', 700: '#5a4cb0', 800: '#3b3580', 900: '#1d1859', 950: '#100e36',
+        },
+        cyan: {
+          50: '#f4f2ff', 100: '#e9e6ff', 200: '#d6d0ff', 300: '#c3baff', 400: '#a99bff',
+          500: '#8e7df0', 600: '#7565d6', 700: '#5a4cb0', 800: '#3b3580', 900: '#1d1859', 950: '#100e36',
+        },
         // Mindora Brand Palette — extracted from logo
         brand: {
           50:  '#f0eeff',
@@ -45,8 +54,15 @@ export default {
           500: '#0ea5e9',
         }
       },
+      borderRadius: {
+        xl: '14px',
+        '2xl': '24px',
+        '3xl': '24px',
+      },
       fontFamily: {
-        sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
+        sans: ['Plus Jakarta Sans Variable', 'Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+        display: ['Bricolage Grotesque Variable', 'Plus Jakarta Sans Variable', 'system-ui', 'sans-serif'],
+        mono: ['Geist Mono Variable', 'ui-monospace', 'monospace'],
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',

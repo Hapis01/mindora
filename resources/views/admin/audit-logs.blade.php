@@ -3,10 +3,10 @@
 @section('content')
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
     <!-- Admin Header -->
-    <div class="p-8 rounded-3xl bg-gradient-to-r from-slate-900 via-amber-950/30 to-slate-900 border border-slate-800 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+    <div class="p-8 rounded-3xl border border-[rgba(190,184,255,0.14)] bg-[#100e36] flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div class="space-y-2">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-950 border border-amber-800 text-amber-300 text-xs font-semibold">
-                <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950 border border-purple-800 text-purple-300 text-xs font-semibold">
+                <span class="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse"></span>
                 Security Center &bull; Audit Trail Log
             </div>
             <h1 class="text-3xl font-extrabold text-white">Log Jejak Audit Keamanan Sistem</h1>
@@ -28,7 +28,7 @@
                        name="search"
                        value="{{ request('search') }}"
                        placeholder="Cari berdasarkan IP, aksi, atau email aktor..."
-                       class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs outline-none focus:ring-2 focus:ring-amber-500">
+                       class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs outline-none focus:ring-2 focus:ring-purple-500">
             </div>
 
             <!-- Action Filter -->
@@ -41,7 +41,7 @@
                 @endforeach
             </select>
 
-            <button type="submit" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold transition-colors shrink-0">
+            <button type="submit" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-purple-500 hover:bg-purple-400 text-slate-950 text-xs font-bold transition-colors shrink-0">
                 Filter Log
             </button>
 
@@ -85,7 +85,7 @@
                             </td>
                             <td class="py-3 px-4 text-slate-200">
                                 @if($log->actor)
-                                    <div class="font-bold text-amber-300">{{ $log->actor->email }}</div>
+                                    <div class="font-bold text-purple-300">{{ $log->actor->email }}</div>
                                     <div class="text-[10px] text-slate-500 font-sans">ID #{{ $log->actor->id }}</div>
                                 @else
                                     <span class="text-slate-500">System / Guest</span>
@@ -95,7 +95,7 @@
                                 @php
                                     $actionColor = match(true) {
                                         str_contains($log->action, 'failed') => 'bg-rose-950 text-rose-400 border-rose-800',
-                                        str_contains($log->action, 'unlock') => 'bg-amber-950 text-amber-400 border-amber-800',
+                                        str_contains($log->action, 'unlock') => 'bg-purple-950 text-purple-400 border-purple-800',
                                         str_contains($log->action, 'finish') => 'bg-emerald-950 text-emerald-400 border-emerald-800',
                                         default => 'bg-slate-800 text-slate-300 border-slate-700',
                                     };

@@ -107,12 +107,12 @@
 
         <!-- Header Card -->
         <div class="p-5 sm:p-7 rounded-2xl sm:rounded-3xl relative overflow-hidden"
-             style="background: linear-gradient(135deg, rgba(30, 27, 94, 0.75) 0%, rgba(13, 11, 51, 0.95) 60%, rgba(124, 58, 237, 0.2) 100%); border: 1px solid rgba(124, 58, 237, 0.25); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);">
+             style="background: linear-gradient(135deg, rgba(29, 24, 89, 0.75) 0%, rgba(8, 7, 28, 0.95) 60%, rgba(169, 155, 255, 0.2) 100%); border: 1px solid rgba(190, 184, 255, 0.14); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);">
             <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div class="flex items-center gap-3.5">
                     <div class="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg"
-                         style="background: linear-gradient(135deg, #7c3aed 0%, #38bdf8 100%); border: 1px solid rgba(255, 255, 255, 0.2);">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
+                         style="background: #f2f0ff; color: #0c0a2a; border: 1px solid rgba(255, 255, 255, 0.2);">
+                        <svg class="w-6 h-6" style="color:#0c0a2a;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
                     </div>
                     <div>
                         <div class="flex items-center gap-2">
@@ -241,8 +241,8 @@
                         <!-- Avatar -->
                         <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl flex items-center justify-center text-xs font-bold text-white flex-shrink-0 shadow-md"
                              :style="msg.role === 'user'
-                                ? 'background:linear-gradient(135deg,#7c3aed,#38bdf8);'
-                                : 'background:linear-gradient(135deg,#6d28d9,#4f46e5);border:1px solid rgba(255,255,255,0.15);'">
+                                ? 'background:#f2f0ff;color:#0c0a2a;'
+                                : 'background:rgba(169,155,255,0.18);border:1px solid rgba(169,155,255,0.4);'">
                             <span x-text="msg.role === 'user' ? '{{ strtoupper(substr(auth()->user()->name, 0, 1)) }}' : 'AI'"></span>
                         </div>
 
@@ -250,7 +250,7 @@
                         <div class="space-y-1">
                             <div class="p-3.5 sm:p-4 rounded-2xl text-xs sm:text-sm leading-relaxed"
                                  :class="msg.role === 'user'
-                                    ? 'bg-purple-600 text-white rounded-tr-none shadow-md'
+                                    ? 'bg-[#a99bff] text-[#0c0a2a] rounded-tr-none shadow-md'
                                     : 'bg-white/[0.04] text-slate-100 border border-purple-500/20 rounded-tl-none shadow-md'">
                                 <div class="whitespace-pre-wrap select-text" x-text="msg.content"></div>
                             </div>
@@ -322,7 +322,7 @@
                    autocomplete="off">
             <button type="submit"
                     :disabled="loading || !inputPrompt.trim()"
-                    class="absolute right-1.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-lg btn-mindora flex items-center justify-center text-white transition-all touch-feedback disabled:opacity-40 disabled:pointer-events-none"
+                    class="absolute right-1.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-[#a99bff] text-[#0c0a2a] flex items-center justify-center transition-all touch-feedback hover:bg-[#cfc8ff] disabled:opacity-40 disabled:pointer-events-none"
                     aria-label="Kirim Pesan">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
             </button>

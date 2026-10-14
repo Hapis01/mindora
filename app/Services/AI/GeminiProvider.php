@@ -12,11 +12,19 @@ class GeminiProvider implements AIProviderInterface
     protected string $baseUrl;
     protected string $model;
 
+    protected array $deprecatedModelMap = [
+        'gemini-3.6-flash' => 'gemini-3-flash-preview',
+        'gemini-2.5-flash' => 'gemini-3-flash-preview',
+        'gemini-2.5-flash-lite' => 'gemini-3.1-flash-lite',
+        'gemini-1.5-flash' => 'gemini-3-flash-preview',
+    ];
+
     public function __construct()
     {
         $this->apiKey = config('services.gemini.api_key');
         $this->baseUrl = rtrim(config('services.gemini.base_url', 'https://generativelanguage.googleapis.com/v1beta'), '/');
-        $this->model = config('services.gemini.model', 'gemini-3.6-flash');
+        $configuredModel = config('services.gemini.model', 'gemini-3-flash-preview');
+        $this->model = $this->deprecatedModelMap[$configuredModel] ?? $configuredModel;
     }
 
     public function getProviderName(): string
@@ -74,11 +82,14 @@ class GeminiProvider implements AIProviderInterface
                 }
 
                 $targetModel = $options['model'] ?? $this->model;
+                $targetModel = $this->deprecatedModelMap[$targetModel] ?? $targetModel;
                 $url = "{$this->baseUrl}/models/{$targetModel}:generateContent?key={$this->apiKey}";
 
-                $response = Http::timeout(45)
-                    ->withHeaders(['Content-Type' => 'application/json'])
-                    ->post($url, $payload);
+                $response = retry(2, function () use ($url, $payload) {
+                    return Http::timeout(25)
+                        ->withHeaders(['Content-Type' => 'application/json'])
+                        ->post($url, $payload);
+                }, 1500);
 
                 if ($response->successful()) {
                     $data = $response->json();

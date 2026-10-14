@@ -29,11 +29,34 @@ Fitur utama:
 - **Panel Admin** — Kelola soal, pengguna, model ML, dan audit log
 - **Keamanan Berlapis** — Enkripsi data pribadi (AES-256-GCM), hashing Argon2id, RBAC, rate limiting, security headers
 
+### Desain & Pengalaman Pengguna
+
+Seluruh antarmuka Mindora memakai **satu sistem desain** yang konsisten dari landing page sampai dashboard:
+
+| Aspek | Detail |
+|-------|--------|
+| **Tema** | Gelap (dark navy `#07061b`) dengan satu aksen lilac `#a99bff` di seluruh situs |
+| **Tipografi** | Bricolage Grotesque (judul), Plus Jakarta Sans (teks), Geist Mono (angka/kode) |
+| **Ikon** | Phosphor Icons |
+| **Animasi** | GSAP + Lenis smooth scroll + SplitText di landing page |
+| **Radius** | Seragam: 24px kartu, 14px blok dalam, pil penuh untuk tombol |
+| **Responsif** | Mobile-first, target sentuh minimal 40px, tanpa overflow horizontal di 390px |
+| **Aksesibilitas** | Dukungan `prefers-reduced-motion`, focus ring lilac, ARIA label |
+
 ---
 
 ## Screenshot
 
-> Tambahkan screenshot halaman landing, dashboard, dan tes di sini setelah deploy.
+| Halaman | Deskripsi |
+|---------|-----------|
+| **Landing Page** | Hero dengan animasi GSAP, penjelasan cara kerja, mesin ML, konsultasi AI, dan FAQ |
+| **Dashboard** | Ringkasan asesmen, kartu menu utama, dan panduan memulai |
+| **Katalog Tes** | Daftar instrumen psikometri aktif dengan durasi dan jumlah soal |
+| **Hasil Asesmen** | Grafik radar kepribadian, skor kognitif, dan insight machine learning |
+| **Asisten AI** | Konsultasi hasil tes secara privat dengan Gemini |
+| **Panel Admin** | Statistik platform, kelola soal, pengguna, model ML, dan audit log |
+
+> Semua halaman memakai tema gelap dengan aksen lilac yang sama, responsif dari layar 390px ke atas.
 
 ---
 
@@ -263,21 +286,23 @@ Setelah menjalankan `php artisan db:seed`, 3 akun demo sudah tersedia:
 
 ## Konfigurasi Tambahan (Opsional)
 
-### Integrasi AI Assistant (Gemini)
+### Integrasi AI Assistant (Google Gemini)
 
-Untuk mengaktifkan fitur AI Assistant, kamu perlu API key dari Gemini:
+Mindora memakai **Google Gemini** sebagai provider AI utama. Untuk mengaktifkannya:
 
-1. Daftar di [platform.Gemini.com](https://platform.Gemini.com/)
+1. Buka [Google AI Studio](https://aistudio.google.com/app/apikey)
 2. Buat API key
 3. Buka file `.env`, isi:
 
 ```env
-GEMINI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxx
-GEMINI_API_BASE=https://api.gemini.com
-GEMINI_MODEL=gemini-chat
+AI_PROVIDER=gemini
+GEMINI_API_KEY=AIzaSyxxxxxxxxxxxxxxxxxxxx
+GEMINI_MODEL=gemini-3-flash-preview
 ```
 
-> Tanpa konfigurasi ini, fitur AI Assistant tidak akan berfungsi. Fitur lainnya tetap berjalan normal.
+> **Provider alternatif (DeepSeek):** ubah `AI_PROVIDER=deepseek` dan isi `DEEPSEEK_API_KEY`.
+>
+> **Tanpa API key:** fitur AI Assistant tetap berjalan memakai mesin analisis lokal Mindora (mode demonstrasi) yang menjawab berdasarkan skor asesmen Anda. Fitur lainnya tidak terpengaruh.
 
 ### Konfigurasi Email (Opsional)
 
@@ -302,20 +327,33 @@ mindora/
 │   ├── Http/Controllers/     # Logic request-response (Auth, Assessment, AI, Admin)
 │   ├── Models/                # Model database (User, Assessment, Question, dll)
 │   ├── Services/              # Business logic (Psychometric, ML, Encryption, AI)
+│   │   └── AI/                # Provider AI (GeminiProvider, DeepSeekProvider, AIService)
 │   └── Policies/              # Authorization rules
 ├── config/                    # Konfigurasi aplikasi (database, auth, session, dll)
 ├── database/
 │   ├── migrations/            # Struktur tabel database
 │   └── seeders/               # Data awal (role, soal, user demo)
-├── docs/                      # Dokumentasi teknis (arsitektur, API, security)
-├── public/                    # File yang bisa diakses browser (CSS, JS, gambar)
-├── resources/views/           # Halaman-halaman HTML (Blade template)
-│   ├── admin/                 # Halaman panel admin
-│   ├── assessments/           # Halaman tes (katalog, instruksi, pengerjaan, hasil)
-│   ├── ai/                    # Halaman AI Assistant
-│   ├── auth/                  # Halaman login & register
-│   ├── dashboard/             # Halaman dashboard user
-│   └── layouts/               # Layout utama (header, footer, sidebar)
+├── docs/                      # Dokumentasi teknis (arsitektur, API, security, diagram)
+├── public/
+│   ├── images/                # Logo & aset gambar
+│   │   └── landing/           # Aset khusus landing page (logo-pill, logo-ghost)
+│   └── build/                 # Hasil build Vite (CSS & JS produksi)
+├── resources/
+│   ├── css/
+│   │   ├── app.css            # Stylesheet utama (dashboard, tes, admin)
+│   │   └── landing.css        # Stylesheet landing page (GSAP, Lenis)
+│   ├── js/
+│   │   ├── app.js             # Script utama
+│   │   ├── landing.js         # Animasi GSAP landing page
+│   │   └── auth.js            # Interaksi halaman login & register
+│   └── views/                 # Halaman HTML (Blade template)
+│       ├── admin/             # Halaman panel admin
+│       ├── assessments/       # Halaman tes (katalog, instruksi, pengerjaan, hasil)
+│       ├── ai/                # Halaman AI Assistant
+│       ├── auth/              # Halaman login & register
+│       ├── dashboard/         # Halaman dashboard user
+│       ├── layouts/           # Layout (app, auth)
+│       └── landing.blade.php  # Landing page (standalone + GSAP)
 ├── routes/web.php             # Daftar URL & routing
 ├── .env.example               # Template konfigurasi (copy jadi .env)
 ├── composer.json              # Dependency PHP
@@ -331,10 +369,14 @@ mindora/
 | **Backend** | PHP 8.2+, Laravel 11 |
 | **Database** | MySQL 8.0 (via XAMPP) |
 | **Frontend** | Tailwind CSS 3, Alpine.js, Chart.js |
+| **Design System** | Satu tema gelap + aksen lilac `#a99bff`, font lokal Bricolage Grotesque / Plus Jakarta Sans / Geist Mono, Phosphor Icons |
+| **Animasi** | GSAP + ScrollTrigger, Lenis smooth scroll, SplitText (landing page) |
 | **Build Tool** | Vite 5 |
-| **AI Integration** | Gemini API |
+| **AI Integration** | Google Gemini Live (`gemini-3-flash-preview`) dengan auto-remap model deprecated + fallback DeepSeek dan mesin analisis lokal |
 | **Security** | AES-256-GCM encryption, Argon2id hashing, RBAC, CSRF protection, rate limiting, security headers |
 | **Testing** | PHPUnit 10 |
+
+> **Catatan AI:** Provider AI diatur lewat `AI_PROVIDER` (`gemini` atau `deepseek`). Jika model yang dikonfigurasi sudah tidak tersedia di Google API, aplikasi otomatis memetakannya ke model pengganti yang aktif, lalu memakai mesin analisis lokal Mindora bila koneksi gagal — sehingga konsultasi tidak pernah berhenti total.
 
 ---
 

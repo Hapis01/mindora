@@ -14,7 +14,7 @@
                         label: 'Rata-rata Skor (%)',
                         data: [{{ $cogAvgLogical }}, {{ $cogAvgNumerical }}, {{ $cogAvgVerbal }}],
                         backgroundColor: ['rgba(59, 130, 246, 0.75)', 'rgba(168, 85, 247, 0.75)', 'rgba(16, 185, 129, 0.75)'],
-                        borderColor: ['#3b82f6', '#a855f7', '#10b981'],
+                        borderColor: ['#a99bff', '#a99bff', '#a99bff'],
                         borderWidth: 1,
                         borderRadius: 8
                     }]
@@ -47,9 +47,9 @@
                             {{ $persAvgAgreeableness }},
                             {{ $persAvgNeuroticism }}
                         ],
-                        backgroundColor: 'rgba(245, 158, 11, 0.25)',
-                        borderColor: '#f59e0b',
-                        pointBackgroundColor: '#fbbf24',
+                        backgroundColor: 'rgba(169, 155, 255, 0.25)',
+                        borderColor: '#a99bff',
+                        pointBackgroundColor: '#cfc8ff',
                         borderWidth: 2,
                     }]
                 },
@@ -73,10 +73,10 @@
 }" x-init="initAdminCharts()">
 
     <!-- Admin Header -->
-    <div class="p-8 rounded-3xl bg-gradient-to-r from-slate-900 via-amber-950/30 to-slate-900 border border-slate-800 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+    <div class="p-8 rounded-3xl border border-[rgba(190,184,255,0.14)] bg-[#100e36] flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div class="space-y-2">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-950 border border-amber-800 text-amber-300 text-xs font-semibold">
-                <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950 border border-purple-800 text-purple-300 text-xs font-semibold">
+                <span class="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse"></span>
                 Admin Control Center &bull; RBAC Protected
             </div>
             <h1 class="text-3xl font-extrabold text-white">Dashboard Administrasi Mindora</h1>
@@ -87,7 +87,7 @@
 
         <div class="flex items-center gap-3">
             <span class="px-3.5 py-1.5 rounded-xl bg-slate-950 border border-slate-800 text-xs font-mono text-slate-300">
-                Data Sensitif: <strong class="text-amber-400">Masked Default</strong>
+                Data Sensitif: <strong class="text-purple-400">Masked Default</strong>
             </span>
         </div>
     </div>
@@ -131,9 +131,9 @@
         <div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-2">
             <div class="flex items-center justify-between text-xs font-semibold text-slate-400 uppercase tracking-wider">
                 <span>Audit Trail Records</span>
-                <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
             </div>
-            <div class="text-3xl font-black text-amber-400 font-mono">{{ $totalAuditLogs }}</div>
+            <div class="text-3xl font-black text-purple-400 font-mono">{{ $totalAuditLogs }}</div>
             <p class="text-[11px] text-slate-500">Aktivitas keamanan tercatat</p>
         </div>
     </div>
@@ -177,23 +177,23 @@
             <div class="grid grid-cols-5 gap-1.5 pt-2 border-t border-slate-800/80 text-center text-[10px]">
                 <div class="p-1.5 rounded-lg bg-slate-950 border border-slate-800">
                     <span class="text-slate-500 block">Openness</span>
-                    <strong class="text-amber-400 font-mono">{{ $persAvgOpenness }}%</strong>
+                    <strong class="text-purple-400 font-mono">{{ $persAvgOpenness }}%</strong>
                 </div>
                 <div class="p-1.5 rounded-lg bg-slate-950 border border-slate-800">
                     <span class="text-slate-500 block">Consc.</span>
-                    <strong class="text-amber-400 font-mono">{{ $persAvgConscientiousness }}%</strong>
+                    <strong class="text-purple-400 font-mono">{{ $persAvgConscientiousness }}%</strong>
                 </div>
                 <div class="p-1.5 rounded-lg bg-slate-950 border border-slate-800">
                     <span class="text-slate-500 block">Extra.</span>
-                    <strong class="text-amber-400 font-mono">{{ $persAvgExtraversion }}%</strong>
+                    <strong class="text-purple-400 font-mono">{{ $persAvgExtraversion }}%</strong>
                 </div>
                 <div class="p-1.5 rounded-lg bg-slate-950 border border-slate-800">
                     <span class="text-slate-500 block">Agree.</span>
-                    <strong class="text-amber-400 font-mono">{{ $persAvgAgreeableness }}%</strong>
+                    <strong class="text-purple-400 font-mono">{{ $persAvgAgreeableness }}%</strong>
                 </div>
                 <div class="p-1.5 rounded-lg bg-slate-950 border border-slate-800">
                     <span class="text-slate-500 block">Neuro.</span>
-                    <strong class="text-amber-400 font-mono">{{ $persAvgNeuroticism }}%</strong>
+                    <strong class="text-purple-400 font-mono">{{ $persAvgNeuroticism }}%</strong>
                 </div>
             </div>
         </div>
@@ -246,7 +246,7 @@
         <div class="lg:col-span-5 p-6 rounded-3xl bg-slate-900/80 border border-slate-800 space-y-4">
             <div class="flex items-center justify-between pb-3 border-b border-slate-800">
                 <h3 class="font-bold text-white text-sm">Audit Stream Terkini</h3>
-                <a href="{{ route('admin.audit-logs') }}" class="text-xs text-amber-400 hover:underline">Semua Log &rarr;</a>
+                <a href="{{ route('admin.audit-logs') }}" class="text-xs text-purple-400 hover:underline">Semua Log &rarr;</a>
             </div>
 
             <div class="space-y-2 text-xs">

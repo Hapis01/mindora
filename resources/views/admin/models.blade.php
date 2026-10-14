@@ -5,7 +5,7 @@
     <!-- Header -->
     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold uppercase tracking-wider mb-2">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-semibold uppercase tracking-wider mb-2">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
                 Machine Learning &amp; AI Diagnostics
             </div>
@@ -77,7 +77,7 @@
         <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 backdrop-blur-xl relative overflow-hidden">
             <div class="flex items-center justify-between">
                 <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">K-Means Silhouette</span>
-                <span class="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center">
+                <span class="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" /></svg>
                 </span>
             </div>
@@ -168,7 +168,7 @@
 
         <!-- Penjelasan Sederhana Angka Persentase -->
         <div class="p-5 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-3">
-            <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-2">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-purple-400 flex items-center gap-2">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
                 Panduan Memahami Angka Persentase (Bahasa Mudah Dipahami)
             </h3>
@@ -241,7 +241,7 @@
                                 </div>
                                 <span class="text-[10px] text-slate-500 font-normal">Registered: {{ $model->created_at->format('d M Y, H:i') }}</span>
                             </td>
-                            <td class="px-6 py-4 font-mono text-amber-400 font-bold">
+                            <td class="px-6 py-4 font-mono text-purple-400 font-bold">
                                 {{ $model->version }}
                             </td>
                             <td class="px-6 py-4 text-slate-300">
@@ -362,7 +362,7 @@
                     <div class="p-3.5 rounded-xl bg-slate-950/40 border border-slate-800/80 flex items-center justify-between gap-4">
                         <div class="space-y-1">
                             <div class="flex items-center gap-2">
-                                <span class="font-mono text-xs font-bold text-amber-400">Score #{{ $prediction->assessment_score_id }}</span>
+                                <span class="font-mono text-xs font-bold text-purple-400">Score #{{ $prediction->assessment_score_id }}</span>
                                 <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20">
                                     {{ $prediction->cluster_label }}
                                 </span>

@@ -19,10 +19,10 @@
      }">
 
     <!-- Admin Header -->
-    <div class="p-8 rounded-3xl bg-gradient-to-r from-slate-900 via-amber-950/30 to-slate-900 border border-slate-800 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+    <div class="p-8 rounded-3xl border border-[rgba(190,184,255,0.14)] bg-[#100e36] flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div class="space-y-2">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-950 border border-amber-800 text-amber-300 text-xs font-semibold">
-                <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950 border border-purple-800 text-purple-300 text-xs font-semibold">
+                <span class="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse"></span>
                 Question Bank &bull; Psychometric Instruments
             </div>
             <h1 class="text-3xl font-extrabold text-white">Bank Soal &amp; Konfigurasi Penilaian</h1>
@@ -41,9 +41,9 @@
         <div class="flex items-center gap-2 overflow-x-auto w-full sm:w-auto">
             @foreach($assessments as $ass)
                 <a href="{{ route('admin.questions', ['assessment_id' => $ass->id]) }}"
-                   class="px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 whitespace-nowrap {{ $selectedAssessmentId == $ass->id ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20' : 'bg-slate-950 text-slate-400 border border-slate-800 hover:text-white' }}">
+                   class="px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 whitespace-nowrap {{ $selectedAssessmentId == $ass->id ? 'bg-purple-500 text-slate-950 shadow-md shadow-purple-500/20' : 'bg-slate-950 text-slate-400 border border-slate-800 hover:text-white' }}">
                     <span>{{ $ass->title }}</span>
-                    <span class="px-1.5 py-0.5 rounded text-[10px] {{ $selectedAssessmentId == $ass->id ? 'bg-amber-600 text-white' : 'bg-slate-800 text-slate-300' }}">
+                    <span class="px-1.5 py-0.5 rounded text-[10px] {{ $selectedAssessmentId == $ass->id ? 'bg-purple-600 text-white' : 'bg-slate-800 text-slate-300' }}">
                         {{ $ass->questions_count }} Soal
                     </span>
                 </a>
@@ -92,7 +92,7 @@
                                     {{ $q->dimension }}
                                 </span>
                             </td>
-                            <td class="py-3 px-4 font-mono text-amber-400">{{ $q->weight }}</td>
+                            <td class="py-3 px-4 font-mono text-purple-400">{{ $q->weight }}</td>
                             <td class="py-3 px-4">
                                 @if($q->is_reverse_scored)
                                     <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-950 text-purple-400 border border-purple-800">
@@ -164,13 +164,13 @@
                 <div class="space-y-1.5">
                     <label class="block text-xs font-medium text-slate-300">Bobot Penilaian (Weight):</label>
                     <input type="number" name="weight" step="1" min="1" max="10" x-model="weight" required
-                           class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs outline-none focus:ring-2 focus:ring-amber-500 font-mono">
+                           class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs outline-none focus:ring-2 focus:ring-purple-500 font-mono">
                 </div>
 
                 <!-- Reverse Scored Toggle -->
                 <div class="space-y-1.5">
                     <label class="block text-xs font-medium text-slate-300">Reverse Scoring (Pembalikan Skala Likert):</label>
-                    <select name="is_reverse_scored" x-model="isReverse" class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs outline-none focus:ring-2 focus:ring-amber-500">
+                    <select name="is_reverse_scored" x-model="isReverse" class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs outline-none focus:ring-2 focus:ring-purple-500">
                         <option value="0">Tidak (Item Positif Searah / Normal)</option>
                         <option value="1">Ya (Item Negatif Dibalik: 1&rarr;5, 2&rarr;4, 3&rarr;3, 4&rarr;2, 5&rarr;1)</option>
                     </select>
@@ -179,7 +179,7 @@
                 <!-- Status -->
                 <div class="space-y-1.5">
                     <label class="block text-xs font-medium text-slate-300">Status Soal:</label>
-                    <select name="status" x-model="status" class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs outline-none focus:ring-2 focus:ring-amber-500">
+                    <select name="status" x-model="status" class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs outline-none focus:ring-2 focus:ring-purple-500">
                         <option value="published">Published (Tampil dalam Asesmen)</option>
                         <option value="draft">Draft (Disembunyikan / Uji Coba)</option>
                         <option value="inactive">Inactive (Non-aktif)</option>
@@ -190,7 +190,7 @@
                     <button @click="editModalOpen = false" type="button" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold">
                         Batal
                     </button>
-                    <button type="submit" class="px-5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold transition-colors">
+                    <button type="submit" class="px-5 py-2 rounded-xl bg-purple-500 hover:bg-purple-400 text-slate-950 text-xs font-bold transition-colors">
                         Simpan Perubahan
                     </button>
                 </div>

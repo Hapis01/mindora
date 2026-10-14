@@ -49,7 +49,7 @@
                     </button>
                 </form>
             @else
-                <button type="button" @click="showUnlockModal = true" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white font-bold text-xs shadow-lg shadow-brand-600/30 transition-all hover:scale-105 flex items-center gap-2">
+                <button type="button" @click="showUnlockModal = true" class="px-5 py-2.5 bg-[#f2f0ff] hover:bg-white text-[#0c0a2a] font-bold text-xs rounded-full transition-all hover:shadow-[0_10px_40px_-12px_rgba(169,155,255,0.65)] flex items-center gap-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" /></svg>
                     Unlock Profile
                 </button>
@@ -183,7 +183,7 @@
                 </div>
 
                 <div class="pt-4 flex items-center justify-end gap-3 border-t border-slate-800">
-                    <button type="submit" class="px-6 py-3 rounded-xl bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white font-bold text-xs shadow-lg shadow-brand-600/30 transition-all">
+                    <button type="submit" class="px-6 py-3 bg-[#f2f0ff] hover:bg-white text-[#0c0a2a] font-bold text-xs rounded-full transition-all hover:shadow-[0_10px_40px_-12px_rgba(169,155,255,0.65)]">
                         Simpan Perubahan (Enkripsi AES-256-GCM)
                     </button>
                 </div>
@@ -238,7 +238,7 @@
                         <button type="button" @click="showUnlockModal = false" class="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 text-xs font-semibold transition-colors">
                             Batal
                         </a>
-                        <button type="submit" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white font-bold text-xs shadow-lg shadow-brand-600/30 transition-all">
+                        <button type="submit" class="px-5 py-2.5 bg-[#f2f0ff] hover:bg-white text-[#0c0a2a] font-bold text-xs rounded-full transition-all hover:shadow-[0_10px_40px_-12px_rgba(169,155,255,0.65)]">
                             Verifikasi & Buka Profil
                         </button>
                     </div>

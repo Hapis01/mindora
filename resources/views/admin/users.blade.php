@@ -92,10 +92,10 @@
      }">
 
     <!-- Admin Header -->
-    <div class="p-8 rounded-3xl bg-gradient-to-r from-slate-900 via-amber-950/30 to-slate-900 border border-slate-800 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+    <div class="p-8 rounded-3xl border border-[rgba(190,184,255,0.14)] bg-[#100e36] flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div class="space-y-2">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-950 border border-amber-800 text-amber-300 text-xs font-semibold">
-                <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950 border border-purple-800 text-purple-300 text-xs font-semibold">
+                <span class="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse"></span>
                 User Management &bull; Sensitive Data Masking
             </div>
             <h1 class="text-3xl font-extrabold text-white">Manajemen Pengguna &amp; Keamanan PII</h1>
@@ -108,8 +108,8 @@
             <!-- Global Timer / Relock Button -->
             <template x-if="timeRemaining > 0">
                 <div class="flex items-center gap-2">
-                    <span class="px-3 py-1.5 rounded-xl bg-amber-950 border border-amber-800 text-amber-300 text-xs font-mono font-bold flex items-center gap-1.5">
-                        <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+                    <span class="px-3 py-1.5 rounded-xl bg-purple-950 border border-purple-800 text-purple-300 text-xs font-mono font-bold flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-purple-400 animate-ping"></span>
                         Akses Terbuka: <span x-text="formatTimer(timeRemaining)"></span>
                     </span>
                     <button @click="relockAll()" type="button" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 transition-colors">
@@ -156,7 +156,7 @@
                             <td class="py-3 px-4 text-slate-200 font-semibold">{{ $u->masked_email }}</td>
                             <td class="py-3 px-4">
                                 @foreach($u->roles as $role)
-                                    <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase {{ $role->name === 'super_admin' ? 'bg-rose-950 text-rose-400 border border-rose-800' : ($role->name === 'admin' ? 'bg-amber-950 text-amber-400 border border-amber-800' : 'bg-slate-800 text-slate-300') }}">
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase {{ $role->name === 'super_admin' ? 'bg-rose-950 text-rose-400 border border-rose-800' : ($role->name === 'admin' ? 'bg-purple-950 text-purple-400 border border-purple-800' : 'bg-slate-800 text-slate-300') }}">
                                         {{ $role->name }}
                                     </span>
                                 @endforeach
@@ -197,7 +197,7 @@
                                 <template x-if="!decryptedUsers[{{ $u->id }}]">
                                     <button @click="openUnlockModal({{ $u->id }}, '{{ $u->masked_email }}')"
                                             type="button"
-                                            class="px-2.5 py-1 rounded-lg bg-amber-950/80 hover:bg-amber-900/80 text-amber-300 border border-amber-800/80 text-[11px] font-sans font-semibold transition-all">
+                                            class="px-2.5 py-1 rounded-lg bg-purple-950/80 hover:bg-purple-900/80 text-purple-300 border border-purple-800/80 text-[11px] font-sans font-semibold transition-all">
                                         Buka Data
                                     </button>
                                 </template>
@@ -238,7 +238,7 @@
 
             <div class="flex items-start justify-between">
                 <div class="space-y-1">
-                    <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-950 border border-amber-800 text-amber-300 text-[11px] font-semibold">
+                    <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-purple-950 border border-purple-800 text-purple-300 text-[11px] font-semibold">
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
                         Re-Autentikasi Akses Sensitif
                     </div>
@@ -248,7 +248,7 @@
             </div>
 
             <div class="p-3.5 rounded-2xl bg-slate-950 border border-slate-800 text-xs text-slate-300 leading-relaxed space-y-1">
-                <p>Membuka data profil pengguna: <strong class="text-amber-400" x-text="selectedUserEmail"></strong></p>
+                <p>Membuka data profil pengguna: <strong class="text-purple-400" x-text="selectedUserEmail"></strong></p>
                 <p class="text-slate-500 text-[11px]">
                     Sesuai kepatuhan privasi (ISO/IEC 27001 &amp; GDPR), setiap aksi dekripsi data pribadi dicatat dalam Security Audit Trail.
                 </p>
@@ -266,14 +266,14 @@
                            required
                            autofocus
                            placeholder="Password admin..."
-                           class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs focus:ring-2 focus:ring-amber-500 outline-none">
+                           class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs focus:ring-2 focus:ring-purple-500 outline-none">
                 </div>
 
                 <div class="flex items-center justify-end gap-3 pt-2">
                     <button @click="unlockModalOpen = false" type="button" :disabled="loading" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold">
                         Batal
                     </button>
-                    <button type="submit" :disabled="loading || !adminPassword" class="px-5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold transition-all disabled:opacity-50 flex items-center gap-2">
+                    <button type="submit" :disabled="loading || !adminPassword" class="px-5 py-2 rounded-xl bg-purple-500 hover:bg-purple-400 text-slate-950 text-xs font-bold transition-all disabled:opacity-50 flex items-center gap-2">
                         <span x-text="loading ? 'Memverifikasi...' : 'Konfirmasi &amp; Buka'"></span>
                     </button>
                 </div>

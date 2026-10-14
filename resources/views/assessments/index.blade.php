@@ -5,17 +5,17 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
     <!-- Header -->
     <div class="p-8 sm:p-10 rounded-3xl relative overflow-hidden"
-         style="background: linear-gradient(135deg, rgba(30, 27, 94, 0.75) 0%, rgba(13, 11, 51, 0.9) 60%, rgba(124, 58, 237, 0.2) 100%); border: 1px solid rgba(124, 58, 237, 0.25); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);">
+         style="background: linear-gradient(135deg, rgba(30, 27, 94, 0.75) 0%, rgba(13, 11, 51, 0.9) 60%, rgba(169, 155, 255, 0.2) 100%); border: 1px solid rgba(169, 155, 255, 0.25); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);">
         
-        <div class="absolute right-0 top-0 w-80 h-80 pointer-events-none rounded-full" style="background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, transparent 70%);"></div>
+        <div class="absolute right-0 top-0 w-80 h-80 pointer-events-none rounded-full" style="background: radial-gradient(circle, rgba(169, 155, 255, 0.15) 0%, transparent 70%);"></div>
 
         <div class="relative z-10 space-y-3">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold" style="background: rgba(124, 58, 237, 0.15); border: 1px solid rgba(124, 58, 237, 0.35); color: #c4b5fd;">
-                <span class="w-1.5 h-1.5 rounded-full" style="background: #7c3aed; box-shadow: 0 0 6px #7c3aed;"></span>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold" style="background: rgba(169, 155, 255, 0.15); border: 1px solid rgba(169, 155, 255, 0.35); color: #cfc8ff;">
+                <span class="w-1.5 h-1.5 rounded-full" style="background: #a99bff; box-shadow: 0 0 6px #a99bff;"></span>
                 Katalog Asesmen Psikometri Terstandarisasi
             </div>
             <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-                Instrumen Asesmen <span class="text-mindora">Mindora</span>
+                Instrumen Asesmen <span class="text-purple-300">Mindora</span>
             </h1>
             <p class="text-sm text-slate-300 max-w-3xl leading-relaxed">
                 Pilihlah instrumen psikometri di bawah untuk mengeksplorasi kemampuan penalaran kognitif atau profil kecenderungan kepribadian Big Five Anda. Hasil diproses menggunakan metode psikometri terstandarisasi yang diperkaya model machine learning.
@@ -38,7 +38,7 @@
                             <!-- Badges -->
                             <div class="flex items-center justify-between">
                                 <span class="px-3 py-1 rounded-full text-xs font-semibold"
-                                      style="{{ $assessment->isCognitive() ? 'background: rgba(56, 189, 248, 0.12); color: #7dd3fc; border: 1px solid rgba(56, 189, 248, 0.3);' : 'background: rgba(124, 58, 237, 0.15); color: #c4b5fd; border: 1px solid rgba(124, 58, 237, 0.35);' }}">
+                                      style="{{ $assessment->isCognitive() ? 'background: rgba(169, 155, 255, 0.12); color: #cfc8ff; border: 1px solid rgba(169, 155, 255, 0.3);' : 'background: rgba(169, 155, 255, 0.15); color: #cfc8ff; border: 1px solid rgba(169, 155, 255, 0.35);' }}">
                                     {{ $category->name }} &bull; {{ $assessment->version }}
                                 </span>
                                 <span class="text-xs text-slate-400 flex items-center gap-1.5 font-mono">
@@ -72,9 +72,9 @@
                         </div>
 
                         <!-- Action Button -->
-                        <div class="pt-4" style="border-top: 1px solid rgba(124, 58, 237, 0.15);">
+                        <div class="pt-4" style="border-top: 1px solid rgba(169, 155, 255, 0.15);">
                             <a href="{{ route('assessments.instructions', $assessment) }}"
-                               class="btn-mindora w-full py-3.5 px-4 rounded-xl text-white font-bold text-sm shadow-lg transition-all flex items-center justify-center gap-2">
+                               class="w-full py-3.5 px-4 rounded-full bg-[#a99bff] text-[#0c0a2a] font-bold text-sm hover:bg-[#cfc8ff] transition-all hover:shadow-[0_10px_40px_-12px_rgba(169,155,255,0.65)] flex items-center justify-center gap-2 touch-feedback">
                                 <span>Petunjuk &amp; Mulai Asesmen</span>
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                             </a>
@@ -87,13 +87,13 @@
 
     <!-- Recent Assessment History -->
     @if($recentSessions->isNotEmpty())
-        <div class="p-8 rounded-3xl space-y-6" style="background: rgba(30, 27, 94, 0.4); border: 1px solid rgba(124, 58, 237, 0.2); backdrop-filter: blur(16px);">
+        <div class="p-8 rounded-3xl space-y-6" style="background: rgba(30, 27, 94, 0.4); border: 1px solid rgba(169, 155, 255, 0.2); backdrop-filter: blur(16px);">
             <h2 class="text-xl font-bold text-white flex items-center gap-2">
                 <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 Riwayat Pengerjaan Anda
             </h2>
 
-            <div class="divide-y" style="border-color: rgba(124, 58, 237, 0.12);">
+            <div class="divide-y" style="border-color: rgba(169, 155, 255, 0.12);">
                 @foreach($recentSessions as $sess)
                     <div class="py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                         <div class="space-y-1">
@@ -107,7 +107,7 @@
                             @if($sess->isCompleted() && $sess->score)
                                 <a href="{{ route('assessments.result', $sess->score) }}"
                                    class="px-4 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 shadow-md"
-                                   style="background: rgba(16, 185, 129, 0.15); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.35);"
+                                   style="background: #a99bff; color: #0c0a2a; border: 1px solid #a99bff;"
                                    onmouseover="this.style.background='rgba(16, 185, 129, 0.25)'"
                                    onmouseout="this.style.background='rgba(16, 185, 129, 0.15)'">
                                     <span>Lihat Hasil &amp; Insight</span>
@@ -116,7 +116,7 @@
                             @else
                                 <a href="{{ route('assessments.take', $sess) }}"
                                    class="px-4 py-2 rounded-xl text-xs font-semibold transition-all shadow-md"
-                                   style="background: rgba(245, 158, 11, 0.15); color: #fcd34d; border: 1px solid rgba(245, 158, 11, 0.35);"
+                                   style="background: #a99bff; color: #0c0a2a; border: 1px solid #a99bff;"
                                    onmouseover="this.style.background='rgba(245, 158, 11, 0.25)'"
                                    onmouseout="this.style.background='rgba(245, 158, 11, 0.15)'">
                                     Lanjutkan Sesi
