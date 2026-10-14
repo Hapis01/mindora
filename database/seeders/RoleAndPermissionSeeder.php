@@ -103,24 +103,28 @@ class RoleAndPermissionSeeder extends Seeder
             'created_at' => now(),
         ]);
 
-        // 6. Seed Encrypted Profile for Standard User
-        $encryptionService = app(\App\Services\EncryptionService::class);
+        // 6. Seed Encrypted Profile for Standard User (never overwrite an existing profile)
         $standardProfile = \App\Models\UserProfile::firstOrNew(['user_id' => $standardUser->id]);
-        $standardProfile->setEncryptedProfile([
-            'name' => 'Muhammad Hafiz',
-            'date_of_birth' => '1998-05-20',
-            'phone' => '081234567890',
-            'address' => 'Jl. Sudirman Kav. 21, Jakarta Selatan',
-            'gender' => 'male',
-        ], $encryptionService);
-        $standardProfile->save();
+        if (!$standardProfile->exists) {
+            $standardProfile->setEncryptedProfile([
+                'name' => 'Muhammad Hafiz',
+                'date_of_birth' => '1998-05-20',
+                'phone' => '081234567890',
+                'address' => 'Jl. Sudirman Kav. 21, Jakarta Selatan',
+                'gender' => 'male',
+            ], app(\App\Services\EncryptionService::class));
+            $standardProfile->save();
+        }
 
-        AuditLog::record(
-            action: 'system_initialized_roles_and_users',
-            target: $superAdminUser,
-            metadata: ['seeded_roles' => 3, 'seeded_users' => 3, 'seeded_profiles' => 1],
-            actorId: $superAdminUser->id,
-            actorType: User::class
-        );
+        // Audit only on first initialization so re-running the seeder adds no duplicate rows
+        if ($superAdminUser->wasRecentlyCreated) {
+            AuditLog::record(
+                action: 'system_initialized_roles_and_users',
+                target: $superAdminUser,
+                metadata: ['seeded_roles' => 3, 'seeded_users' => 3, 'seeded_profiles' => 1],
+                actorId: $superAdminUser->id,
+                actorType: User::class
+            );
+        }
     }
 }

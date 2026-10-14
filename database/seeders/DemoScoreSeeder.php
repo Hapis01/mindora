@@ -18,7 +18,7 @@ class DemoScoreSeeder extends Seeder
 
         // 1. Big Five Personality Session
         $personality = Assessment::where('code', 'big-five-v1')->first();
-        if ($personality) {
+        if ($personality && !$this->hasCompletedSession($user, $personality)) {
             $session = AssessmentSession::create([
                 'user_id' => $user->id,
                 'assessment_id' => $personality->id,
@@ -48,7 +48,7 @@ class DemoScoreSeeder extends Seeder
 
         // 2. Cognitive Assessment Session
         $cognitive = Assessment::where('code', 'cognitive-battery-v1')->first();
-        if ($cognitive) {
+        if ($cognitive && !$this->hasCompletedSession($user, $cognitive)) {
             $sessionCog = AssessmentSession::create([
                 'user_id' => $user->id,
                 'assessment_id' => $cognitive->id,
@@ -75,5 +75,13 @@ class DemoScoreSeeder extends Seeder
             $scoreCog = app(PsychometricService::class)->scoreSession($sessionCog);
             $this->command->info("Cognitive Score #{$scoreCog->id} created with ML Cluster: {$scoreCog->mlPrediction?->cluster_label}");
         }
+    }
+
+    private function hasCompletedSession(User $user, Assessment $assessment): bool
+    {
+        return AssessmentSession::where('user_id', $user->id)
+            ->where('assessment_id', $assessment->id)
+            ->where('status', 'completed')
+            ->exists();
     }
 }

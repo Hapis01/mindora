@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('actor_id')->nullable()->index();
             $table->string('actor_type')->nullable();
-            $table->string('action')->index();
+            $table->string('action', 191)->index();
             $table->string('target_type')->nullable();
             $table->unsignedBigInteger('target_id')->nullable();
             $table->json('metadata')->nullable();

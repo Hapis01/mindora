@@ -24,7 +24,7 @@ class AuthenticationTest extends TestCase
     {
         $response = $this->get('/');
         $response->assertStatus(200);
-        $response->assertSee('Understand Yourself Through', false);
+        $response->assertSee('Psikotes online,', false);
     }
 
     public function test_login_screen_can_be_rendered(): void
@@ -38,7 +38,7 @@ class AuthenticationTest extends TestCase
     {
         $response = $this->get('/register');
         $response->assertStatus(200);
-        $response->assertSee('Buat Akun Mindora');
+        $response->assertSee('Buat akun Mindora');
     }
 
     public function test_users_can_register_with_valid_password(): void

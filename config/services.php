@@ -47,8 +47,8 @@ return [
         'api_key' => env('GEMINI_API_KEY'),
         'base_url' => env('GEMINI_API_BASE', 'https://generativelanguage.googleapis.com/v1beta'),
         'model' => env('GEMINI_MODEL', 'gemini-3-flash-preview'),
-        'project_id' => env('GEMINI_PROJECT_ID', '797505579187'),
-        'project_name' => env('GEMINI_PROJECT_NAME', 'projects/797505579187'),
+        'project_id' => env('GEMINI_PROJECT_ID'),
+        'project_name' => env('GEMINI_PROJECT_NAME'),
     ],
 
     'deepseek' => [
